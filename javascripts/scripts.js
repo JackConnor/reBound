@@ -1,6 +1,6 @@
 
 
-var box = document.querySelector('.ball');
+var box = document.querySelector('.snapper');
 x = 0;
 y = 0;
 
@@ -97,10 +97,13 @@ function move() {
   //var currentDirection = movement('upRight');
     console.log(x, y + "outside for loop");
   setInterval(downRight, 20);
-
-
 }
 
+
+var domEl = document.querySelector('.ball');
+var elPos = domEl.position;
+
+console.log(elPos);
 //box.addEventListener('click', move);
 
 //movement();

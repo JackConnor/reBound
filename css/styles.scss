@@ -1,16 +1,68 @@
 .ball {
-  width: 200px;
-  height: 200px;
-  background-color: red;
+  width: 100px;
+  height: 100px;
+  background-color: blue;
   position: relative;
+  float: left;
+  margin-top: 0px;
+  margin-left: 250px;
+  border-radius: 50%;
+  z-index: 2;
 }
 
+.squareTest {
+  width: 100px;
+  height: 100px;
+  background-color: green;
+  position: relative;
+  margin-top: 125px;
+}
 .holder {
   width: 1000px;
-  height: 600px;
+  height: 900px;
   background-color: gray;
   position: absolute;
   margin: 0 auto;
   left: 0;
   right: 0;
+}
+
+.bouncer.ui-draggable-dragging {
+  background-color: #82A3A3;
+
+}
+
+.board {
+  position: absolute;
+  margin-left: 250px;
+  margin-top: 100px;
+  width: 560px;
+  height: 560px;
+}
+
+.square {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  background-color: #00B28F;
+  margin-left: 0px;
+  margin-left: 0px;
+}
+
+.bouncer {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background-color: #91B5B5;
+  position: relative;
+  margin: 400px 0px 0px 120px;
+}
+#draggableHelper {
+  height: 70px;
+  width: 70px;
+  opacity: 60%;
+  border-radius: 50%;
+  background-color: #91B5B5;
+  position: relative;
+  margin: 400px 0px 0px 120px;
 }
