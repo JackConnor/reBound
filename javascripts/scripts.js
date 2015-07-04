@@ -2,14 +2,19 @@ $(
 
 function() { //jquery start function
 
+
+// Start of Dragging feature to drop bumpers onto board
+
   var arrayRow1 = [];
   var arrayRow2 = [];
   var arrayRow3 = [];
   var arrayRow4 = [];
   var arrayRow5 = [];
+  var masterArray = [[],[],[],[],[]];
 
   $('.bouncer').draggable({snap: '.square', helper: myHelper});
   $('.square').droppable({drop: dropEvent});
+
 
   function dropEvent() { //what happens when you drop on this square
     $(this).removeClass('square ui-droppable').addClass('bounce');
@@ -17,22 +22,27 @@ function() { //jquery start function
 
     if(elId <=5 ) {
     arrayRow1.push(elId);
+    masterArray[0].push(elId);
     console.log("row1");
     }
     else if(elId <=10 ) {
     arrayRow2.push(elId - 5);
+    masterArray[1].push(elId);
     console.log("row2");
     }
     else if(elId <=15 ) {
     arrayRow3.push(elId - 10);
+    masterArray[2].push(elId);
     console.log('row3');
     }
     else if(elId <=20 ) {
     arrayRow4.push(elId - 15);
+    masterArray[3].push(elId);
     console.log('row4');
     }
     else if(elId <=25 ) {
     arrayRow5.push(elId - 20);
+    masterArray[4].push(elId);
     console.log('row5');
     }
     else{
@@ -44,10 +54,26 @@ function() { //jquery start function
     console.log(arrayRow3.sort());
     console.log(arrayRow4.sort());
     console.log(arrayRow5.sort());
+    console.log(masterArray);
   }
 
+function firstMove() {
+  stretch = [];
+  for (var i = 0; i < 5; i++) {
+    if(masterArray[i][0]) {
+    console.log('hell yea we caught something');
+    stretch.push(masterArray[i][0]);
+    }
+    else {
+      console.log('shit');
+      retur
+    }
+    console.log("distance = " + i * + "pxs")
+  }
+}
 
 
+////end bumpers (except for a few calls)
 
   function myHelper() { //this is the drag-clone so you can do multiples
     return '<div id=draggableHelper></div>';
@@ -119,7 +145,7 @@ function() { //jquery start function
 
   //document.querySelector('.square').addEventListener('click', squareClick);
 
-  box.addEventListener('click', move);
+  box.addEventListener('click', firstMove);
 
 
   }
