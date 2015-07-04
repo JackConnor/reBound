@@ -1,13 +1,4 @@
 
-/*------------This is canvass test stuff -------*/
-function doFirst() {
-  var can = document.querySelector('canvas');
-  canvas = can.getContext('2d');
-
-}
-
-window.addEventListener("load", doFirst, false);
-
 
 
 var box = document.querySelector('.snapper');
