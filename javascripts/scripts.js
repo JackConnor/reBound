@@ -1,127 +1,106 @@
+$(
 
+var array = [];
 
+function() { //jquery start function
 
-var box = document.querySelector('.snapper');
-x = 0;
-y = 0;
+  $('.bouncer').draggable({snap: '.square', helper: myHelper});
+  $('.square').droppable({drop: dropEvent});
 
-/*
-function movement() {
-  switch(direction) {
-    case 'downRight':
-    for (var i = 0; i < 2; i++) {
-      x+=1;
-      y+=1;
-      box.style.left = x+'px';
-      box.style.top = y+'px';
-      console.log('loop tested downRight');
-    }
-      br;
-
-
-    case 'upRight':
-    for (var i = 0; i < 2; i++) {
-      x+=1;
-      y-=1;
-      box.style.left = x+'px';
-      box.style.top = y+'px';
-      console.log('loop tested upRight');
+  function dropEvent() { //what happens when you drop on this square
+    $(this).removeClass('square ui-droppable').addClass('bounce');
+    console.log('dropped');
   }
-}
-}
-*/
-
-function downRight() {
-  x+=1;
-  y+=1;
-  for (var i = 0; i < 2; i++) {
-    box.style.top = x+'px';
-    box.style.left = y+'px';
-    console.log(x,y + "inside for loop");
-
-    return (x,y);
+  function myHelper() { //this is the drag-clone so you can do multiples
+    return '<div id=draggableHelper></div>';
   }
-}
 
-function downLeft() {
-  x-=1;
-  y+=1;
-  for (var i = 0; i < 2; i++) {
-    box.style.top = x+'px';
-    box.style.left = y+'px';
-    console.log(x,y+ "inside for loop");
-  }
-}
 
-function upRight() {
-  for (var i = 0; i < 2; i++) {
-    x+=1;
-    y-=1;
-    box.style.top = x+'px';
-    box.style.left = y+'px';
-    console.log('moving');
-  }
-}
+    //-------end jquery page
 
-function upLeft() {
-  for (var i = 0; i < 2; i++) {
-    x-=1;
-    y-=1;
-    box.style.top = x+'px';
-    box.style.left = y+'px';
-    console.log('moving');
-  }
-}
+  var box = document.querySelector('.ball');
+  x = 0;
+  y = 0;
 
-/*
-function downRight() {
-  for (var i = 0; i < 2; i++) {
-    if (y < 400 && x < 400) {
+
+  function downRight() {
     x+=1;
     y+=1;
-    box.style.left = x+'px';
-    box.style.top = y+'px';
-    console.log('loop tested');
-    } else if(y >= 400 && x >=400) {
-    x+=1;
-    y-=1;
-    box.style.left = x+'px';
-    box.style.top = y+'px';
-    console.log('changed directions!');
+    for (var i = 0; i < 2; i++) {
+      box.style.top = x+'px';
+      box.style.left = y+'px';
+      console.log(x,y + "inside for loop");
+
     }
   }
-}
-*/
-
-
-function move() {
-  //var currentDirection = movement('upRight');
-    console.log(x, y + "outside for loop");
-  setInterval(downRight, 20);
-}
-
-
-var domEl = document.querySelector('.ball');
-var elPos = domEl.position;
-
-console.log(elPos);
-//box.addEventListener('click', move);
-
-//movement();
-/*
-var waldo = document.querySelector('.ball');
-var x=0;
-var y=0;
-function loop() {
-    x+=1;
-    y+=1;
-    waldo.style.left = x+"px";
-    waldo.style.top = y+"px";
-    //console.log('hell yea');
+  /*
+  function velocity() {
+    // + or -
+    var vel = "+";
+    return vel;
   }
 
-function move() {
-setInterval(loop, 100);
-}
-waldo.addEventListener('click', move);
-*/
+  function direction() {
+    //y or x
+    var dir = "top";
+    return dir;
+  }
+  */
+
+
+
+  function boardArray() {
+    for (var i = 0; i <= 25 ; i++) {
+      if(this.className == 'square ui-droppable bounce') {
+        array[i].push[1];
+      }
+      }
+    }
+
+
+  function vector() {
+    if (x <= 0 && y <= 516) {
+      x += 0;
+      y += 1;
+      for (var i = 0; i < 2; i++) {
+        box.style.left = x + "px";
+        box.style.top = y + "px";
+      }
+    }
+    else {
+      x += 1;
+      y += 0;
+      for (var i = 0; i < 2; i++) {
+        box.style.left = x + "px";
+        box.style.top = y + "px";
+      }
+    }
+  }
+
+
+  function bounceClick() {
+    var squares = document.querySelectorAll('.bounce');
+    for (var i = 0; i < squares.length; i++) {
+      squares[i].addEventListener('click', function() {
+        console.log("something is happening!");
+      });
+      };
+      //console.log(array);
+  }
+
+  function move() {
+    //var currentDirection = movement('upRight');
+    //console.log(x, y + " outside for loop");
+    setInterval(vector, 5);
+  }
+
+  bounceClick();
+
+  //document.querySelector('.square').addEventListener('click', squareClick);
+
+  box.addEventListener('click', move);
+
+
+  }
+
+)
