@@ -16,29 +16,37 @@ function() { //jquery start function
     var elId = parseInt(this.id);
 
     if(elId <=5 ) {
-    //arrayRow1.push(place);
-    console.log(elId - 3);
+    arrayRow1.push(elId);
+    console.log("row1");
     }
-    else if( 5 < elId <=10 ) {
-    //arrayRow2.push(place);
-    console.log(elId);
+    else if(elId <=10 ) {
+    arrayRow2.push(elId - 5);
+    console.log("row2");
     }
-    else if( 10 < elId <=15 ) {
-    //arrayRow2.push(place);
-    console.log(this.id+'b');
+    else if(elId <=15 ) {
+    arrayRow3.push(elId - 10);
+    console.log('row3');
+    }
+    else if(elId <=20 ) {
+    arrayRow4.push(elId - 15);
+    console.log('row4');
+    }
+    else if(elId <=25 ) {
+    arrayRow5.push(elId - 20);
+    console.log('row5');
+    }
+    else{
+      console.log('huh?');
     }
 
+    console.log(arrayRow1.sort());
+    console.log(arrayRow2.sort());
+    console.log(arrayRow3.sort());
+    console.log(arrayRow4.sort());
+    console.log(arrayRow5.sort());
   }
 
 
-  function bounceClick() {
-    var squares = document.querySelectorAll('.bounce');
-    for (var i = 0; i < squares.length; i++) {
-      squares[i].addEventListener('click', function() {
-        console.log("something is happening!");
-      });
-      };
-  }
 
 
   function myHelper() { //this is the drag-clone so you can do multiples
@@ -78,13 +86,6 @@ function() { //jquery start function
 
 
 
-  function boardArray() {
-    for (var i = 0; i <= 25 ; i++) {
-      if(this.className == 'square ui-droppable bounce') {
-        array[i].push[1];
-      }
-      }
-    }
 
 
   function vector() {
@@ -115,7 +116,6 @@ function() { //jquery start function
     setInterval(vector, 5);
   }
 
-  bounceClick();
 
   //document.querySelector('.square').addEventListener('click', squareClick);
 
