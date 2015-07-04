@@ -13,11 +13,8 @@ $(
     }
   });
   function dropEvent() {
-    var positionX = this.offset();
     $(this).css('background-color', '#00FFCC');
     console.log('dropped');
-    $x.push(positionX.left);
-    $y.push(positionX.top);
   }
   function myHelper() {
     return '<div id=draggableHelper></div>';
