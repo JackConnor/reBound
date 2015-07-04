@@ -63,6 +63,7 @@ function firstMove() {
     if(masterArray[i][0]) {
     console.log('hell yea we caught something');
     stretch.push(masterArray[i][0]);
+    return i;
     }
     else {
       console.log('shit');
