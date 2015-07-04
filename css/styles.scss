@@ -1,0 +1,16 @@
+.ball {
+  width: 200px;
+  height: 200px;
+  background-color: red;
+  position: relative;
+}
+
+.holder {
+  width: 1000px;
+  height: 600px;
+  background-color: gray;
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+}
