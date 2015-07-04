@@ -58,96 +58,61 @@ function() { //jquery start function
   }
 
 function firstMove() {
-  stretch = [];
-  for (var i = 0; i < 5; i++) {
-    if(masterArray[i][0]) {
-    console.log('hell yea we caught something');
-    stretch.push(masterArray[i][0]);
-    return i;
-    }
+  var stretch = [];
+  for (var x = 0; x < 5; x++) {
+    if(masterArray[x][0]) {
+      stretch.push(104+ (x*104));
+      console.log('hell yea we caught something');
+      }
     else {
       console.log('shit');
-      retur
     }
-    console.log("distance = " + i * + "pxs")
   }
+  console.log("distance = " + stretch[0] + "pxs");
+  return stretch[0];
 }
 
 
+
+var x = 0;
+var y = 0;
+
+function vectors() {
+  var firstStretch = firstMove();
+  console.log(firstStretch);
+  if (x <= 0 && y <= firstStretch) {
+    x += 0;
+    y += 1;
+    for (var i = 0; i < 2; i++) {
+      box.style.left = x + "px";
+      box.style.top = y + "px";
+    }
+  }
+
+  else {
+    x += 1;
+    y += 0;
+    for (var i = 0; i < 2; i++) {
+      box.style.left = x + "px";
+      box.style.top = y + "px";
+    }
+  }
+}
 ////end bumpers (except for a few calls)
 
   function myHelper() { //this is the drag-clone so you can do multiples
     return '<div id=draggableHelper></div>';
   }
 
-    //-------end jquery page
 
   var box = document.querySelector('.ball');
-  x = 0;
-  y = 0;
-
-
-  function downRight() {
-    x+=1;
-    y+=1;
-    for (var i = 0; i < 2; i++) {
-      box.style.top = x+'px';
-      box.style.left = y+'px';
-      console.log(x,y + "inside for loop");
-
-    }
-  }
-  /*
-  function velocity() {
-    // + or -
-    var vel = "+";
-    return vel;
-  }
-
-  function direction() {
-    //y or x
-    var dir = "top";
-    return dir;
-  }
-  */
-
-
-
-
-
-  function vector() {
-    if (x <= 0 && y <= 516) {
-      x += 0;
-      y += 1;
-      for (var i = 0; i < 2; i++) {
-        box.style.left = x + "px";
-        box.style.top = y + "px";
-      }
-    }
-    else {
-      x += 1;
-      y += 0;
-      for (var i = 0; i < 2; i++) {
-        box.style.left = x + "px";
-        box.style.top = y + "px";
-      }
-    }
-  }
-
-
 
 
   function move() {
-    //var currentDirection = movement('upRight');
-    //console.log(x, y + " outside for loop");
-    setInterval(vector, 5);
+    setInterval(vectors, 5);
   }
 
-
-  //document.querySelector('.square').addEventListener('click', squareClick);
-
-  box.addEventListener('click', firstMove);
-
+  box.addEventListener('click', move);
 
   }
 )
