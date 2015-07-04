@@ -1,20 +1,49 @@
 $(
 
-var array = [];
-
 function() { //jquery start function
+
+  var arrayRow1 = [];
+  var arrayRow2 = [];
+  var arrayRow3 = [];
+  var arrayRow4 = [];
+  var arrayRow5 = [];
 
   $('.bouncer').draggable({snap: '.square', helper: myHelper});
   $('.square').droppable({drop: dropEvent});
 
   function dropEvent() { //what happens when you drop on this square
     $(this).removeClass('square ui-droppable').addClass('bounce');
-    console.log('dropped');
+    var elId = parseInt(this.id);
+
+    if(elId <=5 ) {
+    //arrayRow1.push(place);
+    console.log(elId - 3);
+    }
+    else if( 5 < elId <=10 ) {
+    //arrayRow2.push(place);
+    console.log(elId);
+    }
+    else if( 10 < elId <=15 ) {
+    //arrayRow2.push(place);
+    console.log(this.id+'b');
+    }
+
   }
+
+
+  function bounceClick() {
+    var squares = document.querySelectorAll('.bounce');
+    for (var i = 0; i < squares.length; i++) {
+      squares[i].addEventListener('click', function() {
+        console.log("something is happening!");
+      });
+      };
+  }
+
+
   function myHelper() { //this is the drag-clone so you can do multiples
     return '<div id=draggableHelper></div>';
   }
-
 
     //-------end jquery page
 
@@ -78,15 +107,7 @@ function() { //jquery start function
   }
 
 
-  function bounceClick() {
-    var squares = document.querySelectorAll('.bounce');
-    for (var i = 0; i < squares.length; i++) {
-      squares[i].addEventListener('click', function() {
-        console.log("something is happening!");
-      });
-      };
-      //console.log(array);
-  }
+
 
   function move() {
     //var currentDirection = movement('upRight');
@@ -102,5 +123,4 @@ function() { //jquery start function
 
 
   }
-
 )
