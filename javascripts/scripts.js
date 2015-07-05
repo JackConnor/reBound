@@ -14,9 +14,13 @@ function() { //jquery start function
   var masterArray = [[],[],[],[],[]];
   var secondMoveRow = [""];
 
-  $('.bouncer').draggable({snap: '.square', helper: myHelper});
-  $('.square').droppable({drop: dropEvent});
+  $('.bouncerForward').draggable({snap: '.square', helper: myHelperForward});
+  $('.bouncerBack').draggable({snap: '.square', helper: myHelperBack});
 
+  //if(marker)
+  $('.square').droppable({drop: dropEvent});
+//else if(other marker)
+  //$('.square').droppable({drop: dropEventBack});
 
   function dropEvent() { //what happens when you drop the draggable item on this square
     $(this).removeClass('square ui-droppable').addClass('bounce');
@@ -170,14 +174,14 @@ function vectors() {
 
   if (x <= 0 && y <= firstStretch) {
     x += 0;
-    y += 5;
+    y += 3;
     for (var i = 0; i < 2; i++) {
       box.style.left = x + "px";
       box.style.top = y + "px";
     }
   }
   else if(x <= (secondStretch-1)*104) {
-    x += 5;
+    x += 3;
     y += 0;
     for (var i = 0; i < 2; i++) {
       box.style.left = x + "px";
@@ -186,7 +190,7 @@ function vectors() {
   }
   else {
     x += 0;
-    y -= 5;
+    y -= 3;
     for (var i = 0; i < 2; i++) {
       box.style.left = x + "px";
       box.style.top = y + "px";
@@ -196,8 +200,13 @@ function vectors() {
 }
 ////end bumpers (except for a few calls)
 
-  function myHelper() { //this is the drag-clone so you can do multiples
-    return '<div id=draggableHelper></div>';
+  function myHelperForward() { //this is the drag-clone so you can do multiples
+    return '<div id=draggableHelperForward></div>';
+  }
+
+  function myHelperBack() { //this is the drag-clone so you can do multiples]
+    $()
+    return '<div id=draggableHelperBack></div>';
   }
 
   var box = document.querySelector('.ball');

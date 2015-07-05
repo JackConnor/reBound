@@ -43,7 +43,15 @@
   margin-left: 0px;
   margin-left: 0px; }
 
-.bouncer {
+.bouncerForward {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background-color: #FAAC58;
+  position: absolute;
+  margin: 300px 0px 0px 120px; }
+
+.bouncerBack {
   height: 60px;
   width: 60px;
   border-radius: 50%;
@@ -51,12 +59,21 @@
   position: absolute;
   margin: 400px 0px 0px 120px; }
 
-#draggableHelper {
+#draggableHelperForward {
   height: 70px;
   width: 70px;
   opacity: 60%;
   border-radius: 50%;
-  background-color: #91B5B5;
+  background-color: #FA8258;
+  position: relative;
+  margin: 300px 0px 0px 120px; }
+
+#draggableHelperBack {
+  height: 70px;
+  width: 70px;
+  opacity: 60%;
+  border-radius: 50%;
+  background-color: #A9F5F2;
   position: relative;
   margin: 400px 0px 0px 120px; }
 
