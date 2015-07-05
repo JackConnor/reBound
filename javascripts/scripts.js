@@ -15,7 +15,7 @@ function() { //jquery start function
   var secondMoveRow = [""];
 
 
-
+/*
   function dropEvent() { //what happens when you drop the draggable item on this square
     $(this).removeClass('square ui-droppable').addClass('bounce');
     var elId = parseInt(this.id);
@@ -73,6 +73,8 @@ function() { //jquery start function
     arrayRow5 = arrayRow5.sort();
     //we push to an arrayRow each time we hit a square, as well as push to an array called secondMoveRow with each row name.
   }
+*/
+
 
 function firstMove() {
   if(secondMoveRow[1]) {

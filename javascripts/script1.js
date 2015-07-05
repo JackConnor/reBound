@@ -49,23 +49,51 @@ $(function() {
 /*----------- Two kinds of bumpers ------------
 --------------Creating Drop Event-------------*/
 
-  //var $bumperCounter = 0;
+
+//---------begin drop event -----------
+
+  function counter() {
+    counter = 1;
+    console.log("counter is: " + counter);
+  }
+
+  $('.bouncerBack').on('mousedown', function() {
+    counter = 1;
+    console.log("counter is: " + counter);
+    return counter;});
+
+  $('.bouncerForward').on('mousedown', function() {
+    counter = 0;
+    console.log("counter is: " + counter);
+    return counter;});
+
+    function dropBumper() {
+        //if(counter == 0) {
+          $('.square').droppable({drop: dropEventForward});
+        //} else if(counter == 1){
+          //$('.square').droppable({drop: dropEventBack});
+        
+      }
+
+      function dropEventForward() {
+        if (counter == 0) {
+          $(this).addClass('bounceForward');
+        } else if(counter == 1) {
+          $(this).addClass('bounceBack');
+        }
+      }
+
+      function dropEventBack() {
+        $(this).addClass('bounceBack');
+        }
+//------------ end drop event ----------
 
 
-  //if(marker)
-  $('.square').droppable({drop: dropEventForward});
-  //else if(other marker)
-  //$('.square').droppable({drop: dropEventBack});
+  $('.bouncerBack').on('drag', function() {
+    console.log("I'm Dragging")});
 
 
 
-  function dropEventForward() {
-    $(this).addClass('bounceForward');
-    }
-
-  function dropEventBack() {
-    $(this).addClass('bounceBack');
-    }
 
 /*
   function dropEvent() { //what happens when you drop the draggable item on this square
@@ -153,5 +181,5 @@ $(function() {
   })
 
   ballMargin();
-
+  dropBumper();
 })
