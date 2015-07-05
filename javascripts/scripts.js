@@ -33,7 +33,6 @@ function() { //jquery start function
     }
     else if(elId <=10 ) {
     arrayRow2.push(elId - 5);
-    //masterArray[1].push(elId);
       if(elId - 5 == 1) {
         secondMoveRow.push("arrayRow2");
       } else {
@@ -42,7 +41,6 @@ function() { //jquery start function
     }
     else if(elId <=15 ) {
     arrayRow3.push(elId - 10);
-    //masterArray[2].push(elId);
       if(elId - 10 == 1) {
         secondMoveRow.push("arrayRow3");
       } else {
@@ -51,7 +49,6 @@ function() { //jquery start function
     }
     else if(elId <=20 ) {
     arrayRow4.push(elId - 15);
-    //masterArray[3].push(elId);
       if(elId - 15 == 1) {
         secondMoveRow.push("arrayRow4");
       } else {
@@ -60,7 +57,6 @@ function() { //jquery start function
     }
     else if(elId <=25 ) {
     arrayRow5.push(elId - 20);
-    //masterArray[4].push(elId);
       if(elId - 20 == 1) {
         secondMoveRow.push("arrayRow5");
       } else {
@@ -70,25 +66,13 @@ function() { //jquery start function
     else{
       console.log('huh?');
     }
-    //console.log(masterArray);
-    console.log(secondMoveRow);
     secondMoveRow = secondMoveRow.sort();
-    console.log("first move at this row: " + secondMoveRow[1]);
-    console.log(arrayRow1);
-    console.log(arrayRow2);
-    console.log(arrayRow3);
-    console.log(arrayRow4);
-    console.log(arrayRow5);
+
     arrayRow1 = arrayRow1.sort();
     arrayRow2 = arrayRow2.sort();
     arrayRow3 = arrayRow3.sort();
     arrayRow4 = arrayRow4.sort();
     arrayRow5 = arrayRow5.sort();
-    console.log(arrayRow1);
-    console.log(arrayRow2);
-    console.log(arrayRow3);
-    console.log(arrayRow4);
-    console.log(arrayRow5);
     //we push to an arrayRow each time we hit a square, as well as push to an array called secondMoveRow with each row name.
   }
 
@@ -121,6 +105,7 @@ function firstMove() {
     }
     else {
     console.log('no column 1 squares filled');
+    return 1500;
     }
   }
 
@@ -129,32 +114,52 @@ function secondMove() {
   switch(secondMoveRow[1]) {
     case "arrayRow1":
       console.log(arrayRow1[1]);
-      return arrayRow1[1];
+      if(arrayRow1[1]){
+        return arrayRow1[1];
+      } else {
+        return 20;
+      }
       break;
 
     case "arrayRow2":
       console.log(arrayRow2[1]);
-      return arrayRow2[1];
+      if(arrayRow2[1]){
+        return arrayRow2[1];
+      } else {
+        return 20;
+      }
       break;
 
     case "arrayRow3":
       console.log(arrayRow3[1]);
-      return arrayRow3[1];
+      if(arrayRow3[1]){
+        return arrayRow3[1];
+      } else {
+        return 20;
+      }
       break;
 
     case "arrayRow4":
       console.log(arrayRow4[1]);
-      return arrayRow4[1];
+      if(arrayRow4[1]){
+        return arrayRow4[1];
+      } else {
+        return 20;
+      }
       break;
 
     case "arrayRow5":
-    console.log(arrayRow5[1]);
-    return arrayRow5[1];
-    break;
+      console.log(arrayRow5[1]);
+      if(arrayRow5[1]){
+        return arrayRow5[1];
+      } else {
+        return 20;
+      }
+      break;
 
-  default:
-    console.log("switch two not catching");
-    return 20;
+    default:
+      console.log("switch two not catching");
+      return 20;
   }
 }
 
@@ -162,8 +167,6 @@ function secondMove() {
 function vectors() {
   var firstStretch = firstMove();
   var secondStretch = secondMove();
-  //console.log('first: '+firstStretch);
-  //console.log(secondStretch);
 
   if (x <= 0 && y <= firstStretch) {
     x += 0;
