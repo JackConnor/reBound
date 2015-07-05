@@ -6,6 +6,15 @@ $(function() {
   var secondMove = [];
   var thirdMove = [];
   var fourthMove = [];
+  var fifthMove = [];
+  var sixthMove = [];
+  var seventhMove = [];
+
+  var arrayOne = [];
+  var arrayTwo = [];
+  var arrayThree = [];
+  var arrayFour = [];
+  var arrayFive = [];
 
   var topOrSide = (Math.floor(Math.random()*1/*should be times 2, but I'm cutting off side for now  */
   )); //for initial ball placement on top or side;
@@ -55,7 +64,6 @@ $(function() {
 
 
     function dropEvent() {
-      console.log(rowOrColumnNumber);
       var idNum = this.id;
       var rowPlace = idNum%5; ///left to right
       var rowNum = (((idNum-1) - ((idNum-1)%5))/5)+1;
@@ -63,39 +71,132 @@ $(function() {
       if (counter == 0) {
         /// we're now building out the logic for what happens when a forward docunter is dropped
         $(this).addClass('bounceForward');
-        console.log("id num: " + idNum);
-        console.log("in the row number: " + rowNum);
-        console.log("and in the " + rowPlace +" spot");
-        if(rowPlace == rowOrColumnNumber) {
-          console.log('this could be your first bumper');
-          console.log("id num is still: " + idNum);
-          console.log("still in the row number: " + rowNum);
-          console.log("and also still in the " + rowPlace +" spot");
-          console.log(secondMove);
-          secondMove.push(rowNum);
-          console.log(secondMove);
-        } else {
-
+        //console.log("id num: " + idNum);
+        //console.log("in the row number: " + rowNum);
+        //console.log("and in the " + rowPlace +" spot");
+        if(rowNum === 1){
+          if(rowPlace == rowOrColumnNumber/*registers strt row*/) {
+            //console.log(secondMove);
+            secondMove.push(rowNum);
+            arrayOne.push(rowPlace);
+            //console.log(secondMove.sort());
+            //console.log("this row has: " + arrayOne);
+          } else {
+            arrayOne.push(rowPlace);
+          //  console.log("this row has: " + arrayOne);
+          }
         }
-        /*else if($(this.id - 5) == rowOrColumnNumber){
-          secondMove.push(this.id);
-          console.log(secondMove);
-        }else if($(this.id - 10) == rowOrColumnNumber){
-          secondMove.push(this.id);
-          console.log(this.id);
-        }else if($(this.id - 15) == rowOrColumnNumber){
-          secondMove.push(this.id);
-          console.log(this.id);
-        }else if($(this.id - 20) == rowOrColumnNumber){
-          secondMove.push(this.id);
-          console.log(this.id);
+        else if(rowNum === 2){
+          if(rowPlace == rowOrColumnNumber/*registers strt row*/) {
+            //console.log(secondMove);
+            secondMove.push(rowNum);
+            arrayTwo.push(rowPlace);
+          //  console.log(secondMove.sort());
+            //console.log("this row has: " + arrayTwo);
+          } else {
+            arrayTwo.push(rowPlace);
+          //  console.log("this row has: " + arrayTwo);
+          }
         }
-
+        else if(rowNum === 3){
+          if(rowPlace == rowOrColumnNumber/*registers strt row*/) {
+          //  console.log(secondMove);
+            secondMove.push(rowNum);
+            arrayThree.push(rowPlace);
+            //console.log(secondMove.sort());
+          } else {
+            arrayThree.push(rowPlace);
+          }
+        }
+        else if(rowNum === 4){
+          if(rowPlace == rowOrColumnNumber/*registers strt row*/) {
+          //  console.log(secondMove);
+            secondMove.push(rowNum);
+            arrayFour.push(rowPlace);
+          //  console.log(secondMove.sort());
+          } else {
+            arrayFour.push(rowPlace);
+          }
+        }
+        else if(rowNum === 5){
+          if(rowPlace == rowOrColumnNumber/*registers strt row*/) {
+            //console.log(secondMove);
+            secondMove.push(rowNum);
+            arrayFive.push(rowPlace);
+            //console.log(secondMove.sort());
+          } else {
+            arrayFive.push(rowPlace);
+          }
+        }
       }
-      /// we're now building out the logic for what happens when a back counter is dropped
-      else if(counter == 1) {
+      //start bouncerBacks
+      else if (counter == 1) {
+        /// we're now building out the logic for what happens when a forward docunter is dropped
         $(this).addClass('bounceBack');
-    */}
+        //console.log("id num: " + idNum);
+        //console.log("in the row number: " + rowNum);
+        //console.log("and in the " + rowPlace +" spot");
+        if(rowNum === 1){
+          if(rowPlace == rowOrColumnNumber/*registers strt row*/) {
+            //console.log(secondMove);
+            secondMove.push(rowNum);
+            arrayOne.push(rowPlace);
+            //console.log(secondMove.sort());
+            //console.log("this row has: " + arrayOne);
+          } else {
+            arrayOne.push(rowPlace);
+          //  console.log("this row has: " + arrayOne);
+          }
+        }
+        else if(rowNum === 2){
+          if(rowPlace == rowOrColumnNumber/*registers strt row*/) {
+            //console.log(secondMove);
+            secondMove.push(rowNum);
+            arrayTwo.push(rowPlace);
+          //  console.log(secondMove.sort());
+            //console.log("this row has: " + arrayTwo);
+          } else {
+            arrayTwo.push(rowPlace);
+          //  console.log("this row has: " + arrayTwo);
+          }
+        }
+        else if(rowNum === 3){
+          if(rowPlace == rowOrColumnNumber/*registers strt row*/) {
+          //  console.log(secondMove);
+            secondMove.push(rowNum);
+            arrayThree.push(rowPlace);
+            //console.log(secondMove.sort());
+          } else {
+            arrayThree.push(rowPlace);
+          }
+        }
+        else if(rowNum === 4){
+          if(rowPlace == rowOrColumnNumber/*registers strt row*/) {
+          //  console.log(secondMove);
+            secondMove.push(rowNum);
+            arrayFour.push(rowPlace);
+          //  console.log(secondMove.sort());
+          } else {
+            arrayFour.push(rowPlace);
+          }
+        }
+        else if(rowNum === 5){
+          if(rowPlace == rowOrColumnNumber/*registers strt row*/) {
+            //console.log(secondMove);
+            secondMove.push(rowNum);
+            arrayFive.push(rowPlace);
+            //console.log(secondMove.sort());
+          } else {
+            arrayFive.push(rowPlace);
+          }
+        }
+      }
+      console.log(arrayOne);
+      console.log(arrayTwo);
+      console.log(arrayThree);
+      console.log(arrayFour);
+      console.log(arrayFive);
+      console.log(secondMove);
     }
 
 //------------ end drop event ----------
@@ -111,6 +212,14 @@ $(function() {
 
 //-------End click event ---------
 
+///--------- Start Flight Generator -------
+
+  function flightGenerator() {
+
+  }
+
+
+//-------- End Flight Generator -----------
 
   $('.bouncerBack').on('drag', function() {
     console.log("I'm Dragging")});
