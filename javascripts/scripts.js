@@ -14,13 +14,7 @@ function() { //jquery start function
   var masterArray = [[],[],[],[],[]];
   var secondMoveRow = [""];
 
-  $('.bouncerForward').draggable({snap: '.square', helper: myHelperForward});
-  $('.bouncerBack').draggable({snap: '.square', helper: myHelperBack});
 
-  //if(marker)
-  $('.square').droppable({drop: dropEvent});
-//else if(other marker)
-  //$('.square').droppable({drop: dropEventBack});
 
   function dropEvent() { //what happens when you drop the draggable item on this square
     $(this).removeClass('square ui-droppable').addClass('bounce');
@@ -200,14 +194,7 @@ function vectors() {
 }
 ////end bumpers (except for a few calls)
 
-  function myHelperForward() { //this is the drag-clone so you can do multiples
-    return '<div id=draggableHelperForward></div>';
-  }
 
-  function myHelperBack() { //this is the drag-clone so you can do multiples]
-    $()
-    return '<div id=draggableHelperBack></div>';
-  }
 
   var box = document.querySelector('.ball');
 
