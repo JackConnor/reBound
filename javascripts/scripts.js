@@ -4,82 +4,167 @@ function() { //jquery start function
 
 
 // Start of Dragging feature to drop bumpers onto board
-
+  var x = 0;
+  var y = 0;
   var arrayRow1 = [];
   var arrayRow2 = [];
   var arrayRow3 = [];
   var arrayRow4 = [];
   var arrayRow5 = [];
   var masterArray = [[],[],[],[],[]];
+  var secondMoveRow = [""];
 
   $('.bouncer').draggable({snap: '.square', helper: myHelper});
   $('.square').droppable({drop: dropEvent});
 
 
-  function dropEvent() { //what happens when you drop on this square
+  function dropEvent() { //what happens when you drop the draggable item on this square
     $(this).removeClass('square ui-droppable').addClass('bounce');
     var elId = parseInt(this.id);
 
     if(elId <=5 ) {
-    arrayRow1.push(elId);
-    masterArray[0].push(elId);
-    console.log("row1");
+      arrayRow1.push(elId);
+      //masterArray[0].push(elId);
+      if(elId == 1) {
+          secondMoveRow.push("arrayRow1");
+      } else {
+        console.log('hmm');
+      }
     }
     else if(elId <=10 ) {
     arrayRow2.push(elId - 5);
-    masterArray[1].push(elId);
-    console.log("row2");
+    //masterArray[1].push(elId);
+      if(elId - 5 == 1) {
+        secondMoveRow.push("arrayRow2");
+      } else {
+        console.log('hmm');
+      }
     }
     else if(elId <=15 ) {
     arrayRow3.push(elId - 10);
-    masterArray[2].push(elId);
-    console.log('row3');
+    //masterArray[2].push(elId);
+      if(elId - 10 == 1) {
+        secondMoveRow.push("arrayRow3");
+      } else {
+        console.log('hmm');
+        }
     }
     else if(elId <=20 ) {
     arrayRow4.push(elId - 15);
-    masterArray[3].push(elId);
-    console.log('row4');
+    //masterArray[3].push(elId);
+      if(elId - 15 == 1) {
+        secondMoveRow.push("arrayRow4");
+      } else {
+        console.log('hmm');
+        }
     }
     else if(elId <=25 ) {
     arrayRow5.push(elId - 20);
-    masterArray[4].push(elId);
-    console.log('row5');
-    }
+    //masterArray[4].push(elId);
+      if(elId - 20 == 1) {
+        secondMoveRow.push("arrayRow5");
+      } else {
+        console.log('hmm');
+        }
+      }
     else{
       console.log('huh?');
     }
-
-    console.log(arrayRow1.sort());
-    console.log(arrayRow2.sort());
-    console.log(arrayRow3.sort());
-    console.log(arrayRow4.sort());
-    console.log(arrayRow5.sort());
-    console.log(masterArray);
+    //console.log(masterArray);
+    console.log(secondMoveRow);
+    secondMoveRow = secondMoveRow.sort();
+    console.log("first move at this row: " + secondMoveRow[1]);
+    console.log(arrayRow1);
+    console.log(arrayRow2);
+    console.log(arrayRow3);
+    console.log(arrayRow4);
+    console.log(arrayRow5);
+    arrayRow1 = arrayRow1.sort();
+    arrayRow2 = arrayRow2.sort();
+    arrayRow3 = arrayRow3.sort();
+    arrayRow4 = arrayRow4.sort();
+    arrayRow5 = arrayRow5.sort();
+    console.log(arrayRow1);
+    console.log(arrayRow2);
+    console.log(arrayRow3);
+    console.log(arrayRow4);
+    console.log(arrayRow5);
+    //we push to an arrayRow each time we hit a square, as well as push to an array called secondMoveRow with each row name.
   }
 
 function firstMove() {
-  var stretch = [];
-  for (var x = 0; x < 5; x++) {
-    if(masterArray[x][0]) {
-      stretch.push(104+ (x*104));
-      console.log('hell yea we caught something');
+  if(secondMoveRow[1]) {
+    switch (secondMoveRow[1]) {
+      case "arrayRow1":
+        return 104;
+        break;
+
+      case "arrayRow2":
+        return 208;
+        break;
+
+      case "arrayRow3":
+        return 312;
+        break;
+
+      case "arrayRow4":
+        return 416;
+        break;
+
+      case "arrayRow5":
+        return 520;
+        break;
+
+      default:
+        return 1000;
       }
+    }
     else {
-      console.log('shit');
+    console.log('no column 1 squares filled');
     }
   }
-  console.log("distance = " + stretch[0] + "pxs");
-  return stretch[0];
+
+
+function secondMove() {
+  switch(secondMoveRow[1]) {
+    case "arrayRow1":
+      console.log(arrayRow1[1]);
+      return arrayRow1[1];
+      break;
+
+    case "arrayRow2":
+      console.log(arrayRow2[1]);
+      return arrayRow2[1];
+      break;
+
+    case "arrayRow3":
+      console.log(arrayRow3[1]);
+      return arrayRow3[1];
+      break;
+
+    case "arrayRow4":
+      console.log(arrayRow4[1]);
+      return arrayRow4[1];
+      break;
+
+    case "arrayRow5":
+    console.log(arrayRow5[1]);
+    return arrayRow5[1];
+    break;
+
+  default:
+    console.log("switch two not catching");
+    return 20;
+  }
 }
 
 
-
-var x = 0;
-var y = 0;
-
 function vectors() {
   var firstStretch = firstMove();
-  console.log(firstStretch);
+  var secondStretch = secondMove();
+  //console.log('first: '+firstStretch);
+  //console.log(secondStretch);
+
   if (x <= 0 && y <= firstStretch) {
     x += 0;
     y += 1;
@@ -88,8 +173,7 @@ function vectors() {
       box.style.top = y + "px";
     }
   }
-
-  else {
+  else if(x <= (secondStretch-1)*104) {
     x += 1;
     y += 0;
     for (var i = 0; i < 2; i++) {
@@ -97,6 +181,15 @@ function vectors() {
       box.style.top = y + "px";
     }
   }
+  else {
+    x += 0;
+    y -= 1;
+    for (var i = 0; i < 2; i++) {
+      box.style.left = x + "px";
+      box.style.top = y + "px";
+    }
+  }
+
 }
 ////end bumpers (except for a few calls)
 
@@ -104,15 +197,12 @@ function vectors() {
     return '<div id=draggableHelper></div>';
   }
 
-
   var box = document.querySelector('.ball');
-
 
   function move() {
     setInterval(vectors, 5);
   }
 
   box.addEventListener('click', move);
-
   }
 )
