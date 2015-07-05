@@ -204,6 +204,6 @@ function vectors() {
     setInterval(vectors, 5);
   }
 
-  box.addEventListener('click', move);
+  //box.addEventListener('click', move);
   }
 )

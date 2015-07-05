@@ -3,60 +3,38 @@ $(function() {
 
   var counter = 0;
 
-  var topOrSide = (Math.floor(Math.random()*2)); //for initial ball placement on top or side;
+  var secondMove = [];
+  var thirdMove = [];
+  var fourthMove = [];
+
+  var topOrSide = (Math.floor(Math.random()*1/*should be times 2, but I'm cutting off side for now  */
+  )); //for initial ball placement on top or side;
 
   function marginAmount() {
     var oneFive = Math.floor((Math.random()*5)+1);
+    console.log("the starting row is: " + oneFive);
     return oneFive;
   }
 
   var rowOrColumnNumber = marginAmount(); // this var is a # (1 - 5) will be the row or column number the ball is place at
 
-
-  function placeBall() { //returns a binary for top or side
-    if(topOrSide === 0) {
-      var topSide = "top";
-      return topSide;
-    }
-    else if(topOrSide === 1) {
-      var topSide = "side";
-      return topSide;
-    }
-  }
-
-
   function ballMargin() {
-    //var tp = placeBall();
-    //var oneToFive = marginAmount();
     var pixelsMoved  = (rowOrColumnNumber)*104;
     if(topOrSide == 0) {
       $(".ball").css('margin-left', 146 + (pixelsMoved));
-      console.log(pixelsMoved);
-      console.log('top: '+ rowOrColumnNumber);
     } else if(topOrSide == 1) {
       $(".ball").css('margin-left', '140px');
       $(".ball").css('margin-top', (pixelsMoved)+"px");
-      console.log(pixelsMoved);
-      console.log('side: ' + rowOrColumnNumber);
     }
   }
 
   $('.bouncerForward').draggable({snap: '.square', helper: myHelperForward});
   $('.bouncerBack').draggable({snap: '.square', helper: myHelperBack});
+  $('.square').droppable({drop: dropEvent});
 
 
-
-/*----------- Two kinds of bumpers ------------
---------------Creating Drop Event-------------*/
-
-
-//---------begin drop event -----------
-
-  function counter() {
-    counter = 1;
-    console.log("counter is: " + counter);
-  }
-
+// --------- controls how bumper interaction
+/// ------------ affects counter
   $('.bouncerBack').on('mousedown', function() {
     counter = 1;
     console.log("counter is: " + counter);
@@ -68,25 +46,70 @@ $(function() {
     return counter;});
 
     function dropBumper() {
-        //if(counter == 0) {
-          $('.square').droppable({drop: dropEventForward});
-        //} else if(counter == 1){
-          //$('.square').droppable({drop: dropEventBack});
-        
+      $('.square').droppable({drop: dropEvent});
       }
 
-      function dropEventForward() {
-        if (counter == 0) {
-          $(this).addClass('bounceForward');
-        } else if(counter == 1) {
-          $(this).addClass('bounceBack');
+
+  //---------begin drop event -----------
+  //---------------------------------
+
+
+    function dropEvent() {
+      console.log(rowOrColumnNumber);
+      var idNum = this.id;
+      var rowPlace = idNum%5; ///left to right
+      var rowNum = (((idNum-1) - ((idNum-1)%5))/5)+1;
+      ///note: this mess above returns row number
+      if (counter == 0) {
+        /// we're now building out the logic for what happens when a forward docunter is dropped
+        $(this).addClass('bounceForward');
+        console.log("id num: " + idNum);
+        console.log("in the row number: " + rowNum);
+        console.log("and in the " + rowPlace +" spot");
+        if(rowPlace == rowOrColumnNumber) {
+          console.log('this could be your first bumper');
+          console.log("id num is still: " + idNum);
+          console.log("still in the row number: " + rowNum);
+          console.log("and also still in the " + rowPlace +" spot");
+          console.log(secondMove);
+          secondMove.push(rowNum);
+          console.log(secondMove);
+        } else {
+
         }
-      }
+        /*else if($(this.id - 5) == rowOrColumnNumber){
+          secondMove.push(this.id);
+          console.log(secondMove);
+        }else if($(this.id - 10) == rowOrColumnNumber){
+          secondMove.push(this.id);
+          console.log(this.id);
+        }else if($(this.id - 15) == rowOrColumnNumber){
+          secondMove.push(this.id);
+          console.log(this.id);
+        }else if($(this.id - 20) == rowOrColumnNumber){
+          secondMove.push(this.id);
+          console.log(this.id);
+        }
 
-      function dropEventBack() {
+      }
+      /// we're now building out the logic for what happens when a back counter is dropped
+      else if(counter == 1) {
         $(this).addClass('bounceBack');
-        }
+    */}
+    }
+
 //------------ end drop event ----------
+
+
+//----- Click Event -------------
+
+  function clickMove() {
+    console.log('whatup');
+  }
+
+
+
+//-------End click event ---------
 
 
   $('.bouncerBack').on('drag', function() {
@@ -176,10 +199,12 @@ $(function() {
   }
 
   /*-------------------------------------------------------*/
+  //////------Event Listeners and stuff that needs triggers --------------
+
   $('.bouncerback').click(function() {
     console.log("hello");
   })
-
+  $('.ball').on('click', clickMove);
   ballMargin();
   dropBumper();
 })
