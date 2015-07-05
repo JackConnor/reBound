@@ -170,14 +170,14 @@ function vectors() {
 
   if (x <= 0 && y <= firstStretch) {
     x += 0;
-    y += 1;
+    y += 5;
     for (var i = 0; i < 2; i++) {
       box.style.left = x + "px";
       box.style.top = y + "px";
     }
   }
   else if(x <= (secondStretch-1)*104) {
-    x += 1;
+    x += 5;
     y += 0;
     for (var i = 0; i < 2; i++) {
       box.style.left = x + "px";
@@ -186,7 +186,7 @@ function vectors() {
   }
   else {
     x += 0;
-    y -= 1;
+    y -= 5;
     for (var i = 0; i < 2; i++) {
       box.style.left = x + "px";
       box.style.top = y + "px";
