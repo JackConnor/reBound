@@ -84,7 +84,7 @@ $(function() {
       };
       var rowPlace = rowFilter(); ///left to right
       console.log("filtered row point is: "+ rowPlace);
-      var rowNum = ((this.id - rowPlace+10)/10)+1;
+      var rowNum = ((this.id - rowPlace+5)/5);
       console.log(" you just placed at; upDown: " +rowNum+ " and leftRight: " +rowPlace);
       //var rowPlace = idNum - ((rowNum-1)*5);
       if (counter == 0) {
