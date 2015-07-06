@@ -69,7 +69,7 @@ $(function() {
 
     function dropEvent() {
       var idNum = this.id;
-      var rowPlace = idNum%5; ///left to right
+      var rowPlace = this.id%5; ///left to right
       var rowNum = (((idNum) - ((idNum)%5))/5)+1;
       if (counter == 0) {
         /// we're now building out the logic for what happens when a forward bouncer is dropped

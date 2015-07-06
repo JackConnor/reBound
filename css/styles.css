@@ -76,7 +76,8 @@
   margin: 400px 0px 0px 50px; }
 
 .bounceForward {
-  background-color: #FAAC58;
+  background-image: url('bounceForward.png');
+  /*background-color: #FAAC58;*/
   width: 100px;
   height: 100px;
   display: inline-block;
@@ -84,7 +85,8 @@
   margin-left: 0px; }
 
 .bounceBack {
-  background-color: #91B5B5;
+  background-image: url('bounceBack.png');
+  /*background-color: #91B5B5;*/
   width: 100px;
   height: 100px;
   display: inline-block;
