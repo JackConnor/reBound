@@ -14,14 +14,8 @@ function() { //jquery start function
   var masterArray = [[],[],[],[],[]];
   var secondMoveRow = [""];
 
-  $('.bouncerForward').draggable({snap: '.square', helper: myHelperForward});
-  $('.bouncerBack').draggable({snap: '.square', helper: myHelperBack});
 
-  //if(marker)
-  $('.square').droppable({drop: dropEvent});
-//else if(other marker)
-  //$('.square').droppable({drop: dropEventBack});
-
+/*
   function dropEvent() { //what happens when you drop the draggable item on this square
     $(this).removeClass('square ui-droppable').addClass('bounce');
     var elId = parseInt(this.id);
@@ -79,6 +73,8 @@ function() { //jquery start function
     arrayRow5 = arrayRow5.sort();
     //we push to an arrayRow each time we hit a square, as well as push to an array called secondMoveRow with each row name.
   }
+*/
+
 
 function firstMove() {
   if(secondMoveRow[1]) {
@@ -200,14 +196,7 @@ function vectors() {
 }
 ////end bumpers (except for a few calls)
 
-  function myHelperForward() { //this is the drag-clone so you can do multiples
-    return '<div id=draggableHelperForward></div>';
-  }
 
-  function myHelperBack() { //this is the drag-clone so you can do multiples]
-    $()
-    return '<div id=draggableHelperBack></div>';
-  }
 
   var box = document.querySelector('.ball');
 
@@ -215,6 +204,6 @@ function vectors() {
     setInterval(vectors, 5);
   }
 
-  box.addEventListener('click', move);
+  //box.addEventListener('click', move);
   }
 )

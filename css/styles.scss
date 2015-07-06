@@ -66,30 +66,44 @@
   margin: 400px 0px 0px 50px;
 }
 #draggableHelperForward {
-  height: 70px;
-  width: 70px;
-  opacity: 60%;
+  height: 50px;
+  width: 50px;
   border-radius: 50%;
-  background-color: #FA8258;
+  background-color: #FAAC58;
   position: relative;
   margin: 300px 0px 0px 50px;
 }
 
 #draggableHelperBack {
-  height: 70px;
-  width: 70px;
-  opacity: 60%;
+  height: 50px;
+  width: 50px;
   border-radius: 50%;
-  background-color: #A9F5F2;
+  background-color: #91B5B5;
   position: relative;
   margin: 400px 0px 0px 50px;
 }
 
-.bounce {
-  background-color: #47B224;
+.bounceForward {
+  background-color: #FAAC58;
   width: 100px;
   height: 100px;
   display: inline-block;
   margin-left: 0px;
   margin-left: 0px;
+}
+
+.bounceBack {
+  background-color: #91B5B5;
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  margin-left: 0px;
+  margin-left: 0px;
+}
+
+p {
+  font-size: 40px;
+  font-weight: bolder;
+  position: relative;
+  margin: 7px 0px 0px 24px;
 }
