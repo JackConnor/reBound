@@ -399,7 +399,7 @@ $(function() {
     var nextMove = thirdMove[1];
     console.log("the next move will ping off of column(up down): "+theRow+"; and row: "+theColumn+", bouncing in a the direction of: " + nextMove);
     if (nextMove == "fromForward") {
-      
+
     }
     for (var i = 0; i < 4; i++) {
 
@@ -440,8 +440,8 @@ $(function() {
     var fourth = fourthMovement();
     $('.ball').animate({marginTop: first},500, function(){
       $(this).animate({marginLeft: second}, 500, function() {
-        $(this).animate({marginTop: third}, 500, function() {
-          $(this).animate({marginLeft: fourth}, 500)
+        $(this).animate({marginTop: first}, 500, function() {
+          $(this).animate({marginLeft: second}, 500)
         })
       })});
     /*
