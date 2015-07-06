@@ -211,6 +211,7 @@ $(function() {
       box.style.top = x+'px';
     }, 5);
   }
+//--------------
 
 
   function firstMovement() {
@@ -239,10 +240,16 @@ $(function() {
        var newBumper = arrayOne[startIndex-1];
        console.log("we're going left");
        if ((newBumper/newBumper)==1) {
+         thirdMove.push(newBumper);
+         thirdMove.push("fromForward");
+         console.log("third Move's row is: "+ thirdMove);
          return (newBumper*104)+146;
        } else {
          newBumperArray = newBumper.split('');
          newBackBumper = newBumperArray[0];
+         thirdMove.push(newBackBumper);
+         thirdMove.push("fromBack");
+         console.log("third Move's row is: "+ thirdMove);
          return (newBackBumper*104)+146;
        }
 
@@ -254,10 +261,16 @@ $(function() {
        var nextBumpId = arrayOne[startIndex+1];
        console.log(nextBumpId);
        if((nextBumpId/nextBumpId)==1){
+         thirdMove.push(nextBumpId);
+         thirdMove.push("fromForward");
+         console.log(thirdMove);
          return ((arrayOne[startIndex+1])*104)+146;
        } else {
          newBumperArray = nextBumpId.split('');
          newBackBumper = newBumperArray[0];
+         thirdMove.push(newBackBumper);
+         thirdMove.push("fromBack");
+         console.log(thirdMove);
          return (newBackBumper*104)+146;
        }
      }
@@ -281,7 +294,7 @@ $(function() {
        var nextBumpId = arrayTwo[startIndex+1];
        console.log(nextBumpId);
        if((nextBumpId/nextBumpId)==1){
-         return ((arrayTwo[startIndex+1])*104)+146;
+         return ((nextBumpId)*104)+146;
        } else {
          newBumperArray = nextBumpId.split('');
          newBackBumper = newBumperArray[0];
@@ -378,8 +391,28 @@ $(function() {
 
 
   function thirdMovement() {
+//thirdMove[0]= third move's starting row
+//thirdMove[1] = "fromForward" or "fromBack"
+//currently just forward to forward works
+    var theColumn = thirdMove[0]; //not filtered for 'a'
+    var theRow = secondMove[0];
+    var nextMove = thirdMove[1];
+    console.log("the next move will ping off of column(up down): "+theRow+"; and row: "+theColumn+", bouncing in a the direction of: " + nextMove);
+    if (nextMove == "fromForward") {
+      
+    }
+    for (var i = 0; i < 4; i++) {
+
+    }
+
     return 1000;
   }
+
+
+
+
+
+
   function fourthMovement() {
     return 400;
   }
