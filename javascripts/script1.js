@@ -230,39 +230,71 @@ $(function() {
     console.log(firstMovement);
 
     return firstMovement;
-/*
-
-    if(moveRow == 1) {
-      $('.ball').animate({marginTop: firstMovement+ 'px'}, firstMovement*12);
-      counter++;
-    }
-    else if(moveRow == 2) {
-      $('.ball').animate({marginTop: firstMovement+ 'px'}, firstMovement*6);
-      counter++;
-    }
-    else if(moveRow == 3) {
-      $('.ball').animate({marginTop: firstMovement+ 'px'}, firstMovement*4);
-      counter++;
-    }
-    else if(moveRow == 4) {
-      $('.ball').animate({marginTop: firstMovement+ 'px'}, firstMovement*3);
-      counter++;
-    }
-    else if(moveRow == 5) {
-      $('.ball').animate({marginTop: firstMovement+ 'px'}, firstMovement*2.5);
-      counter++;
-    }
-    */
   }
 
   function secondMovement() {
-    console.log("The starting point is: "+rowOrColumnNumber);//starting point of ball
-    var point = rowOrColumnNumber;
-    console.log('pont is: '+point);
-    var activeRow = secondMove[0];
-    if(activeRow == 1) {//this layer filters forward and back bumpers
-      var startIndex = arrayOne.indexOf(point);
-      var newBumper = arrayOne[startIndex-1];
+     console.log("The starting point is: "+rowOrColumnNumber);//starting point of ball
+     var point = rowOrColumnNumber;
+     console.log('pont is: '+point);
+     var activeRow = secondMove[0];
+     if(activeRow == 1) {//this layer filters forward and back bumpers
+       var startIndex = arrayOne.indexOf(point);
+       var newBumper = arrayOne[startIndex-1];
+       console.log("we're going left");
+       if (newBumper%7==true) {
+         return (newBumper*104)+146;
+       } else {
+         newBumperArray = newBumper.split('');
+         newBackBumper = newBumperArray[0];
+         return (newBackBumper*104)+146;
+       }
+
+       //because this returns a string in the center if the next bumper is a back
+     } else if(activeRow == "1a") {
+       var pointBack = point+'a';
+       var startIndex = arrayOne.indexOf(pointBack);
+       console.log("we're going right");
+       var nextBumpId = arrayOne[startIndex+1];
+       console.log(nextBumpId);
+       if(nextBumpId%2==true){
+         return ((arrayOne[startIndex+1])*104)+146;
+       } else {
+         newBumperArray = nextBumpId.split('');
+         newBackBumper = newBumperArray[0];
+         return (newBackBumper*104)+146;
+       }
+     }
+
+      else if(activeRow == 2) {//this layer filters forward and back bumpers
+       var startIndex = arrayTwo.indexOf(point);
+       var newBumper = arrayTwo[startIndex-1];
+       console.log("we're going left");
+       if (newBumper%7==true) {
+         return (newBumper*104)+146;
+       } else {
+         newBumperArray = newBumper.split('');
+         newBackBumper = newBumperArray[0];
+         return (newBackBumper*104)+146;
+       }
+
+       //because this returns a string in the center if the next bumper is a back
+     } else if(activeRow == "2a") {
+       var pointBack = point+'a';
+       var startIndex = arrayTwo.indexOf(pointBack);
+       console.log("we're going right");
+       var nextBumpId = arrayTwo[startIndex+1];
+       console.log(nextBumpId);
+       if(nextBumpId%2==true){
+         return ((arrayTwo[startIndex+1])*104)+146;
+       } else {
+         newBumperArray = nextBumpId.split('');
+         newBackBumper = newBumperArray[0];
+         return (newBackBumper*104)+146;
+       }
+     }
+     else if(activeRow == 3) {//this layer filters forward and back bumpers
+      var startIndex = arrayThree.indexOf(point);
+      var newBumper = arrayThree[startIndex-1];
       console.log("we're going left");
       if (newBumper%7==true) {
         return (newBumper*104)+146;
@@ -273,22 +305,84 @@ $(function() {
       }
 
       //because this returns a string in the center if the next bumper is a back
-    } else if(activeRow == "1a") {
+    } else if(activeRow == "3a") {
       var pointBack = point+'a';
-      var startIndex = arrayOne.indexOf(pointBack);
+      var startIndex = arrayThree.indexOf(pointBack);
       console.log("we're going right");
-      return ((arrayOne[startIndex+1])*104)+146;
+      var nextBumpId = arrayThree[startIndex+1];
+      console.log(nextBumpId);
+      if(nextBumpId%2==true){
+        return ((arrayThree[startIndex+1])*104)+146;
+      } else {
+        newBumperArray = nextBumpId.split('');
+        newBackBumper = newBumperArray[0];
+        return (newBackBumper*104)+146;
+      }
+    }
+    else if(activeRow == 4) {//this layer filters forward and back bumpers
+     var startIndex = arrayFour.indexOf(point);
+     var newBumper = arrayFour[startIndex-1];
+     console.log("we're going left");
+     if (newBumper%7==true) {
+       return (newBumper*104)+146;
+     } else {
+       newBumperArray = newBumper.split('');
+       newBackBumper = newBumperArray[0];
+       return (newBackBumper*104)+146;
+     }
+
+     //because this returns a string in the center if the next bumper is a back
+   } else if(activeRow == "4a") {
+     var pointBack = point+'a';
+     var startIndex = arrayFour.indexOf(pointBack);
+     console.log("we're going right");
+     var nextBumpId = arrayFour[startIndex+1];
+     console.log(nextBumpId);
+     if(nextBumpId%2==true){
+       return ((arrayTwo[startIndex+1])*104)+146;
+     } else {
+       newBumperArray = nextBumpId.split('');
+       newBackBumper = newBumperArray[0];
+       return (newBackBumper*104)+146;
+     }
+   }
+   else if(activeRow == 5) {//this layer filters forward and back bumpers
+    var startIndex = arrayFive.indexOf(point);
+    var newBumper = arrayFive[startIndex-1];
+    console.log("we're going left");
+    if (newBumper%7==true) {
+      return (newBumper*104)+146;
+    } else {
+      newBumperArray = newBumper.split('');
+      newBackBumper = newBumperArray[0];
+      return (newBackBumper*104)+146;
     }
 
-    else {
-      console.log("can't read the row array");
+    //because this returns a string in the center if the next bumper is a back
+  } else if(activeRow == "5a") {
+    var pointBack = point+'a';
+    var startIndex = arrayFive.indexOf(pointBack);
+    console.log("we're going right");
+    var nextBumpId = arrayFive[startIndex+1];
+    console.log(nextBumpId);
+    if(nextBumpId%2==true){
+      return ((arrayFive[startIndex+1])*104)+146;
+    } else {
+      newBumperArray = nextBumpId.split('');
+      newBackBumper = newBumperArray[0];
+      return (newBackBumper*104)+146;
     }
   }
+
+     else {
+       console.log("can't read the row array");
+     }
+   }
 
 
 
   function thirdMovement() {
-    return 400;
+    return 1000;
   }
   function fourthMovement() {
     return 400;
