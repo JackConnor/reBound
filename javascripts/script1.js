@@ -26,11 +26,14 @@ $(function() {
   function marginAmount() {
     var oneFive = Math.floor((Math.random()*5)+1);
     console.log("the starting row is: " + oneFive);
+    return oneFive;
+  }
+    /*
     if(oneFive == 5){
       return (Math.floor(Math.random()*4)+1) //this is to temporarily take out the fifth column until we get it working
     }
     return oneFive;
-  }
+  }*/
 
   var rowOrColumnNumber = marginAmount(); // this var is a # (1 - 5) will be the row or column number the ball is place at
 
@@ -72,10 +75,19 @@ $(function() {
 
     function dropEvent() {
       var idNum = this.id;
-      var rowPlace = this.id%5; ///left to right
-      var rowNum = (((idNum) - ((idNum)%5))/5)+1;
+      var rowFilter = function() {
+        if(idNum%5 === 0) {
+          return 5;
+        } else {
+          return idNum%5;
+        }
+      };
+      var rowPlace = rowFilter(); ///left to right
+      console.log("filtered row point is: "+ rowPlace);
+      var rowNum = ((this.id - rowPlace+10)/10)+1;
+      console.log(" you just placed at; upDown: " +rowNum+ " and leftRight: " +rowPlace);
+      //var rowPlace = idNum - ((rowNum-1)*5);
       if (counter == 0) {
-        /// we're now building out the logic for what happens when a forward bouncer is dropped
         $(this).addClass('bounceForward');
         console.log("id num: " + idNum);
         console.log("in the row number: " + rowNum);
@@ -84,7 +96,8 @@ $(function() {
           if(rowPlace == rowOrColumnNumber/*registers strt row*/) {
             secondMove.push(rowNum);
             arrayOne.push(rowPlace);
-          } else {
+          }
+          else {
             arrayOne.push(rowPlace);
           }
         }
@@ -113,7 +126,7 @@ $(function() {
           }
         }
         else if(rowNum === 5){
-          if(rowPlace == rowOrColumnNumber/*registers strt row*/) {
+          if(rowPlace == rowOrColumnNumber ) {
             secondMove.push(rowNum);
             arrayFive.push(rowPlace);
           } else {
@@ -123,7 +136,6 @@ $(function() {
       }
       //start bouncerBacks
       else if (counter == 1) {
-        /// we're now building out the logic for what happens when a forward docunter is dropped
         $(this).addClass('bounceBack');
         console.log("id num: " + idNum);
         console.log("in the row number: " + rowNum);
@@ -354,7 +366,7 @@ $(function() {
        thirdMove.push(nextBumpId);
        thirdMove.push("fromForward");
        console.log(thirdMove);
-       return ((arrayTwo[startIndex+1])*104)+146;
+       return ((nextBumpId)*104)+146;
      } else {
        newBumperArray = nextBumpId.split('');
        newBackBumper = newBumperArray[0];
@@ -421,6 +433,9 @@ $(function() {
     var fromLeftOrRight = theColumn - rowOrColumnNumber;
     console.log("the next move will ping off of column(up down): "+theRow+"; and row: "+theColumn+", bouncing in a the direction of: " + nextMove);
     console.log(fromLeftOrRight);
+
+
+    //var nextArray = //array of all the bounced squares in this column
     if(nextMove == "fromForward" && fromLeftOrRight > 0) {
       return -1000;
     } else if(nextMove == "fromForward" && fromLeftOrRight < 0){
@@ -467,10 +482,10 @@ $(function() {
     var second = secondMovement();
     var third = thirdMovement();
     var fourth = fourthMovement();
-    $('.ball').animate({marginTop: first},500, function(){
-      $(this).animate({marginLeft: second}, 500, function() {
+    $('.ball').animate({marginTop: first},300, function(){
+      $(this).animate({marginLeft: second}, 200, function() {
         $(this).animate({marginTop: third}, 500, function() {
-          $(this).animate({marginLeft: second}, 500)
+          $(this).animate({marginLeft: second}, 500);
         })
       })});
     /*
@@ -519,6 +534,7 @@ $(function() {
 
 
   $('.ball').on('click', flightController);
+  console.log("checking for index of: "+ arrayOne.indexOf('2a'));
 
   ballMargin();
   dropBumper();
