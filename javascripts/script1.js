@@ -26,6 +26,9 @@ $(function() {
   function marginAmount() {
     var oneFive = Math.floor((Math.random()*5)+1);
     console.log("the starting row is: " + oneFive);
+    if(oneFive == 5){
+      return (Math.floor(Math.random()*4)+1) //this is to temporarily take out the fifth column until we get it working
+    }
     return oneFive;
   }
 
@@ -183,35 +186,6 @@ $(function() {
 //------------ end drop event ----------
 //-------Begin Moves ----------------
 
-////--- core movements as functions ----
-
-  function north() {
-    y-=1;
-    setInterval(function() {
-      box.style.top = y+'px';
-    }, 5);
-  }
-
-  function south() {
-      setInterval(function() {
-        y+=1;
-        box.style.top = y+'px';
-      }, 5);
-  }
-  function east() {
-    setInterval(function() {
-      x+=1;
-      box.style.top = x+'px';
-    }, 5);
-  }
-
-  function west() {
-    setInterval(function() {
-      x-=1;
-      box.style.top = x+'px';
-    }, 5);
-  }
-//--------------
 
 
   function firstMovement() {
@@ -223,10 +197,9 @@ $(function() {
     console.log(moveRowArray);
 
     var moveRow = moveRowArray[0];
-    console.log(moveRow);
+    console.log("move row is: " + moveRow);
 
     var firstMovement = moveRow*104;
-
     console.log(firstMovement);
 
     return firstMovement;
@@ -280,10 +253,16 @@ $(function() {
        var newBumper = arrayTwo[startIndex-1];
        console.log("we're going left");
        if ((newBumper/newBumper)==1) {
+         thirdMove.push(newBumper);
+         thirdMove.push("fromForward");
+         console.log(thirdMove);
          return (newBumper*104)+146;
        } else {
          newBumperArray = newBumper.split('');
          newBackBumper = newBumperArray[0];
+         thirdMove.push(newBackBumper);
+         thirdMove.push("fromBack");
+         console.log("third Move's row is: "+ thirdMove);
          return (newBackBumper*104)+146;
        }
 
@@ -294,10 +273,16 @@ $(function() {
        var nextBumpId = arrayTwo[startIndex+1];
        console.log(nextBumpId);
        if((nextBumpId/nextBumpId)==1){
+         thirdMove.push(nextBumpId);
+         thirdMove.push("fromForward");
+         console.log(thirdMove);
          return ((nextBumpId)*104)+146;
        } else {
          newBumperArray = nextBumpId.split('');
          newBackBumper = newBumperArray[0];
+         thirdMove.push(newBackBumper);
+         thirdMove.push("fromBack");
+         console.log("third Move's row is: "+ thirdMove);
          return (newBackBumper*104)+146;
        }
      }
@@ -306,10 +291,16 @@ $(function() {
       var newBumper = arrayThree[startIndex-1];
       console.log("we're going left");
       if ((newBumper/newBumper)==1) {
+        thirdMove.push(newBumper);
+        thirdMove.push("fromForward");
+        console.log(thirdMove);
         return (newBumper*104)+146;
       } else {
         newBumperArray = newBumper.split('');
         newBackBumper = newBumperArray[0];
+        thirdMove.push(newBackBumper);
+        thirdMove.push("fromBack");
+        console.log("third Move's row is: "+ thirdMove);
         return (newBackBumper*104)+146;
       }
 
@@ -321,10 +312,16 @@ $(function() {
       var nextBumpId = arrayThree[startIndex+1];
       console.log(nextBumpId);
       if((nextBumpId/nextBumpId)==1){
+        thirdMove.push(nextBumpId);
+        thirdMove.push("fromForward");
+        console.log(thirdMove);
         return ((arrayThree[startIndex+1])*104)+146;
       } else {
         newBumperArray = nextBumpId.split('');
         newBackBumper = newBumperArray[0];
+        thirdMove.push(newBackBumper);
+        thirdMove.push("fromBack");
+        console.log("third Move's row is: "+ thirdMove);
         return (newBackBumper*104)+146;
       }
     }
@@ -333,10 +330,16 @@ $(function() {
      var newBumper = arrayFour[startIndex-1];
      console.log("we're going left");
      if ((newBumper/newBumper)==1) {
+       thirdMove.push(newBumper);
+       thirdMove.push("fromForward");
+       console.log(thirdMove);
        return (newBumper*104)+146;
      } else {
        newBumperArray = newBumper.split('');
        newBackBumper = newBumperArray[0];
+       thirdMove.push(newBackBumper);
+       thirdMove.push("fromBack");
+       console.log("third Move's row is: "+ thirdMove);
        return (newBackBumper*104)+146;
      }
 
@@ -348,10 +351,16 @@ $(function() {
      var nextBumpId = arrayFour[startIndex+1];
      console.log(nextBumpId);
      if((nextBumpId/nextBumpId)==1){
+       thirdMove.push(nextBumpId);
+       thirdMove.push("fromForward");
+       console.log(thirdMove);
        return ((arrayTwo[startIndex+1])*104)+146;
      } else {
        newBumperArray = nextBumpId.split('');
        newBackBumper = newBumperArray[0];
+       thirdMove.push(newBackBumper);
+       thirdMove.push("fromBack");
+       console.log("third Move's row is: "+ thirdMove);
        return (newBackBumper*104)+146;
      }
    }
@@ -360,10 +369,16 @@ $(function() {
     var newBumper = arrayFive[startIndex-1];
     console.log("we're going left");
     if ((newBumper/newBumper)==1) {
+      thirdMove.push(newBumper);
+      thirdMove.push("fromForward");
+      console.log(thirdMove);
       return (newBumper*104)+146;
     } else {
       newBumperArray = newBumper.split('');
       newBackBumper = newBumperArray[0];
+      thirdMove.push(newBackBumper);
+      thirdMove.push("fromBack");
+      console.log("third Move's row is: "+ thirdMove);
       return (newBackBumper*104)+146;
     }
 
@@ -375,10 +390,16 @@ $(function() {
     var nextBumpId = arrayFive[startIndex+1];
     console.log(nextBumpId);
     if((nextBumpId/nextBumpId)==1){
+      thirdMove.push(nextBumpId);
+      thirdMove.push("fromForward");
+      console.log(thirdMove);
       return ((arrayFive[startIndex+1])*104)+146;
     } else {
       newBumperArray = nextBumpId.split('');
       newBackBumper = newBumperArray[0];
+      thirdMove.push(newBackBumper);
+      thirdMove.push("fromBack");
+      console.log("third Move's row is: "+ thirdMove);
       return (newBackBumper*104)+146;
     }
   }
@@ -397,15 +418,23 @@ $(function() {
     var theColumn = thirdMove[0]; //not filtered for 'a'
     var theRow = secondMove[0];
     var nextMove = thirdMove[1];
+    var fromLeftOrRight = theColumn - rowOrColumnNumber;
     console.log("the next move will ping off of column(up down): "+theRow+"; and row: "+theColumn+", bouncing in a the direction of: " + nextMove);
-    if (nextMove == "fromForward") {
-
+    console.log(fromLeftOrRight);
+    if(nextMove == "fromForward" && fromLeftOrRight > 0) {
+      return -1000;
+    } else if(nextMove == "fromForward" && fromLeftOrRight < 0){
+      return 1000;
     }
-    for (var i = 0; i < 4; i++) {
-
+    else if((nextMove == "fromBack") && (fromLeftOrRight > 0)) {
+      return 1000;
     }
-
-    return 1000;
+    else if(nextMove == "fromBack" && fromLeftOrRight < 0){
+      return -500;
+    }
+    else {
+      return 20;
+    }
   }
 
 
@@ -440,7 +469,7 @@ $(function() {
     var fourth = fourthMovement();
     $('.ball').animate({marginTop: first},500, function(){
       $(this).animate({marginLeft: second}, 500, function() {
-        $(this).animate({marginTop: first}, 500, function() {
+        $(this).animate({marginTop: third}, 500, function() {
           $(this).animate({marginLeft: second}, 500)
         })
       })});

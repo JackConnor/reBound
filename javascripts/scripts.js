@@ -15,67 +15,6 @@ function() { //jquery start function
   var secondMoveRow = [""];
 
 
-/*
-  function dropEvent() { //what happens when you drop the draggable item on this square
-    $(this).removeClass('square ui-droppable').addClass('bounce');
-    var elId = parseInt(this.id);
-
-    if(elId <=5 ) {
-      arrayRow1.push(elId);
-      //masterArray[0].push(elId);
-      if(elId == 1) {
-          secondMoveRow.push("arrayRow1");
-      } else {
-        console.log('hmm');
-      }
-    }
-    else if(elId <=10 ) {
-    arrayRow2.push(elId - 5);
-      if(elId - 5 == 1) {
-        secondMoveRow.push("arrayRow2");
-      } else {
-        console.log('hmm');
-      }
-    }
-    else if(elId <=15 ) {
-    arrayRow3.push(elId - 10);
-      if(elId - 10 == 1) {
-        secondMoveRow.push("arrayRow3");
-      } else {
-        console.log('hmm');
-        }
-    }
-    else if(elId <=20 ) {
-    arrayRow4.push(elId - 15);
-      if(elId - 15 == 1) {
-        secondMoveRow.push("arrayRow4");
-      } else {
-        console.log('hmm');
-        }
-    }
-    else if(elId <=25 ) {
-    arrayRow5.push(elId - 20);
-      if(elId - 20 == 1) {
-        secondMoveRow.push("arrayRow5");
-      } else {
-        console.log('hmm');
-        }
-      }
-    else{
-      console.log('huh?');
-    }
-    secondMoveRow = secondMoveRow.sort();
-
-    arrayRow1 = arrayRow1.sort();
-    arrayRow2 = arrayRow2.sort();
-    arrayRow3 = arrayRow3.sort();
-    arrayRow4 = arrayRow4.sort();
-    arrayRow5 = arrayRow5.sort();
-    //we push to an arrayRow each time we hit a square, as well as push to an array called secondMoveRow with each row name.
-  }
-*/
-
-
 function firstMove() {
   if(secondMoveRow[1]) {
     switch (secondMoveRow[1]) {
