@@ -256,16 +256,37 @@ $(function() {
   }
 
   function secondMovement() {
-    console.log("The starting point is: "+rowOrColumnNumber);
+    console.log("The starting point is: "+rowOrColumnNumber);//starting point of ball
+    var point = rowOrColumnNumber;
+    console.log('pont is: '+point);
     var activeRow = secondMove[0];
-    if(activeRow == 1) {
-      console.log("here's what's in that row: "+arrayOne);
-    }else {
+    if(activeRow == 1) {//this layer filters forward and back bumpers
+      var startIndex = arrayOne.indexOf(point);
+      var newBumper = arrayOne[startIndex-1];
+      console.log("we're going left");
+      if (newBumper%7==true) {
+        return (newBumper*104)+146;
+      } else {
+        newBumperArray = newBumper.split('');
+        newBackBumper = newBumperArray[0];
+        return (newBackBumper*104)+146;
+      }
+
+      //because this returns a string in the center if the next bumper is a back
+    } else if(activeRow == "1a") {
+      var pointBack = point+'a';
+      var startIndex = arrayOne.indexOf(pointBack);
+      console.log("we're going right");
+      return ((arrayOne[startIndex+1])*104)+146;
+    }
+
+    else {
       console.log("can't read the row array");
     }
-    console.log(secondMove);
-    return 200;
   }
+
+
+
   function thirdMovement() {
     return 400;
   }
@@ -289,7 +310,7 @@ $(function() {
 
 ///--------- Start Flight Generator -------
 
-  function flightGenerator() {
+  function flightController() {
     var first = firstMovement();
     var second = secondMovement();
     var third = thirdMovement();
@@ -347,7 +368,7 @@ $(function() {
   /*-------------------------------------------------------*/
   //////------Event Listeners and stuff that needs triggers --------------
 
-  $('.ball').on('click', flightGenerator);
+  $('.ball').on('click', flightController);
 
   ballMargin();
   dropBumper();
