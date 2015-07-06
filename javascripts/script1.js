@@ -1,7 +1,11 @@
 
 $(function() {
+  var x = 0;
+  var y = 0;
 
   var counter = 0;
+  var currentMove = "firstMove";
+  var box = document.querySelector('.ball');
 
   var secondMove = [];
   var thirdMove = [];
@@ -66,64 +70,50 @@ $(function() {
     function dropEvent() {
       var idNum = this.id;
       var rowPlace = idNum%5; ///left to right
-      var rowNum = (((idNum-1) - ((idNum-1)%5))/5)+1;
+      var rowNum = (((idNum) - ((idNum)%5))/5)+1;
       ///note: this mess above returns row number
       if (counter == 0) {
         /// we're now building out the logic for what happens when a forward docunter is dropped
         $(this).addClass('bounceForward');
-        //console.log("id num: " + idNum);
-        //console.log("in the row number: " + rowNum);
-        //console.log("and in the " + rowPlace +" spot");
+        console.log("id num: " + idNum);
+        console.log("in the row number: " + rowNum);
+        console.log("and in the " + rowPlace +" spot");
         if(rowNum === 1){
           if(rowPlace == rowOrColumnNumber/*registers strt row*/) {
-            //console.log(secondMove);
             secondMove.push(rowNum);
             arrayOne.push(rowPlace);
-            //console.log(secondMove.sort());
-            //console.log("this row has: " + arrayOne);
           } else {
             arrayOne.push(rowPlace);
-          //  console.log("this row has: " + arrayOne);
           }
         }
         else if(rowNum === 2){
           if(rowPlace == rowOrColumnNumber/*registers strt row*/) {
-            //console.log(secondMove);
             secondMove.push(rowNum);
             arrayTwo.push(rowPlace);
-          //  console.log(secondMove.sort());
-            //console.log("this row has: " + arrayTwo);
           } else {
             arrayTwo.push(rowPlace);
-          //  console.log("this row has: " + arrayTwo);
           }
         }
         else if(rowNum === 3){
           if(rowPlace == rowOrColumnNumber/*registers strt row*/) {
-          //  console.log(secondMove);
             secondMove.push(rowNum);
             arrayThree.push(rowPlace);
-            //console.log(secondMove.sort());
           } else {
             arrayThree.push(rowPlace);
           }
         }
         else if(rowNum === 4){
           if(rowPlace == rowOrColumnNumber/*registers strt row*/) {
-          //  console.log(secondMove);
             secondMove.push(rowNum);
             arrayFour.push(rowPlace);
-          //  console.log(secondMove.sort());
           } else {
             arrayFour.push(rowPlace);
           }
         }
         else if(rowNum === 5){
           if(rowPlace == rowOrColumnNumber/*registers strt row*/) {
-            //console.log(secondMove);
             secondMove.push(rowNum);
             arrayFive.push(rowPlace);
-            //console.log(secondMove.sort());
           } else {
             arrayFive.push(rowPlace);
           }
@@ -133,64 +123,56 @@ $(function() {
       else if (counter == 1) {
         /// we're now building out the logic for what happens when a forward docunter is dropped
         $(this).addClass('bounceBack');
-        //console.log("id num: " + idNum);
-        //console.log("in the row number: " + rowNum);
-        //console.log("and in the " + rowPlace +" spot");
+        console.log("id num: " + idNum);
+        console.log("in the row number: " + rowNum);
+        console.log("and in the " + rowPlace +" spot");
         if(rowNum === 1){
           if(rowPlace == rowOrColumnNumber/*registers strt row*/) {
-            //console.log(secondMove);
-            secondMove.push(rowNum);
-            arrayOne.push(rowPlace);
-            //console.log(secondMove.sort());
-            //console.log("this row has: " + arrayOne);
+            secondMove.push(rowNum+"a");
+            arrayOne.push(rowPlace+"a");
           } else {
-            arrayOne.push(rowPlace);
-          //  console.log("this row has: " + arrayOne);
+            arrayOne.push(rowPlace+"a");
           }
         }
         else if(rowNum === 2){
           if(rowPlace == rowOrColumnNumber/*registers strt row*/) {
-            //console.log(secondMove);
-            secondMove.push(rowNum);
-            arrayTwo.push(rowPlace);
-          //  console.log(secondMove.sort());
-            //console.log("this row has: " + arrayTwo);
+            secondMove.push(rowNum+"a");
+            arrayTwo.push(rowPlace+"a");
           } else {
-            arrayTwo.push(rowPlace);
-          //  console.log("this row has: " + arrayTwo);
+            arrayTwo.push(rowPlace+"a");
           }
         }
         else if(rowNum === 3){
           if(rowPlace == rowOrColumnNumber/*registers strt row*/) {
-          //  console.log(secondMove);
-            secondMove.push(rowNum);
-            arrayThree.push(rowPlace);
-            //console.log(secondMove.sort());
+            secondMove.push(rowNum+"a");
+            arrayThree.push(rowPlace+"a");
           } else {
-            arrayThree.push(rowPlace);
+            arrayThree.push(rowPlace+"a");
           }
         }
         else if(rowNum === 4){
           if(rowPlace == rowOrColumnNumber/*registers strt row*/) {
-          //  console.log(secondMove);
-            secondMove.push(rowNum);
-            arrayFour.push(rowPlace);
-          //  console.log(secondMove.sort());
+            secondMove.push(rowNum+"a");
+            arrayFour.push(rowPlace+"a");
           } else {
-            arrayFour.push(rowPlace);
+            arrayFour.push(rowPlace+"a");
           }
         }
         else if(rowNum === 5){
           if(rowPlace == rowOrColumnNumber/*registers strt row*/) {
-            //console.log(secondMove);
-            secondMove.push(rowNum);
-            arrayFive.push(rowPlace);
-            //console.log(secondMove.sort());
+            secondMove.push(rowNum+"a");
+            arrayFive.push(rowPlace+"a");
           } else {
-            arrayFive.push(rowPlace);
+            arrayFive.push(rowPlace+"a");
           }
         }
       }
+      arrayOne.sort();
+      arrayTwo.sort();
+      arrayThree.sort();
+      arrayFour.sort();
+      arrayFive.sort();
+      secondMove.sort();
       console.log(arrayOne);
       console.log(arrayTwo);
       console.log(arrayThree);
@@ -200,23 +182,140 @@ $(function() {
     }
 
 //------------ end drop event ----------
+//-------Begin Moves ----------------
 
+////--- core movements as functions ----
 
-//----- Click Event -------------
+  function north() {
+    y-=1;
+    setInterval(function() {
+      box.style.top = y+'px';
+    }, 5);
+  }
 
-  function clickMove() {
-    console.log('whatup');
+  function south() {
+      setInterval(function() {
+        y+=1;
+        box.style.top = y+'px';
+      }, 5);
+  }
+  function east() {
+    setInterval(function() {
+      x+=1;
+      box.style.top = x+'px';
+    }, 5);
+  }
+
+  function west() {
+    setInterval(function() {
+      x-=1;
+      box.style.top = x+'px';
+    }, 5);
   }
 
 
+  function firstMovement() {
+ //try to use this to chain moves
+    var moveRowString = secondMove[0].toString();
+    console.log(moveRowString);
 
+    var moveRowArray = moveRowString.split('');
+    console.log(moveRowArray);
+
+    var moveRow = moveRowArray[0];
+    console.log(moveRow);
+
+    var firstMovement = moveRow*104;
+
+    console.log(firstMovement);
+
+    return firstMovement;
+/*
+
+    if(moveRow == 1) {
+      $('.ball').animate({marginTop: firstMovement+ 'px'}, firstMovement*12);
+      counter++;
+    }
+    else if(moveRow == 2) {
+      $('.ball').animate({marginTop: firstMovement+ 'px'}, firstMovement*6);
+      counter++;
+    }
+    else if(moveRow == 3) {
+      $('.ball').animate({marginTop: firstMovement+ 'px'}, firstMovement*4);
+      counter++;
+    }
+    else if(moveRow == 4) {
+      $('.ball').animate({marginTop: firstMovement+ 'px'}, firstMovement*3);
+      counter++;
+    }
+    else if(moveRow == 5) {
+      $('.ball').animate({marginTop: firstMovement+ 'px'}, firstMovement*2.5);
+      counter++;
+    }
+    */
+  }
+
+  function secondMovement() {
+    console.log("The starting point is: "+rowOrColumnNumber);
+    var activeRow = secondMove[0];
+    if(activeRow == 1) {
+      console.log("here's what's in that row: "+arrayOne);
+    }else {
+      console.log("can't read the row array");
+    }
+    console.log(secondMove);
+    return 200;
+  }
+  function thirdMovement() {
+    return 400;
+  }
+  function fourthMovement() {
+    return 400;
+  }
+
+  //----- Click Event -------------
+/*
+  function clickMove() {
+    var firstMovement = firstMove();
+    for (var i = 0; i < firstMovement; i++) {
+      setInterval(firstMove, 5);
+    }
+  }
+
+*/
 //-------End click event ---------
+
+
 
 ///--------- Start Flight Generator -------
 
   function flightGenerator() {
-
-  }
+    var first = firstMovement();
+    var second = secondMovement();
+    var third = thirdMovement();
+    var fourth = fourthMovement();
+    $('.ball').animate({marginTop: first},500, function(){
+      $(this).animate({marginLeft: second}, 500, function() {
+        $(this).animate({marginTop: third}, 500, function() {
+          $(this).animate({marginLeft: fourth}, 500)
+        })
+      })});
+    /*
+    console.log('are we flying?');
+    console.log('original counter is: ' +counter);
+    for (var i = 0; i < 10; i++) {
+      if(counter == 0) {
+        firstMove()
+        console.log("counter is: " + counter);
+      } else if(counter == 1) {
+        secondMovement();
+      } else {
+        console.log("and beyond x 8 or so.")
+      }
+      console.log("counter is: " +counter);
+      }
+      */
+    }
 
 
 //-------- End Flight Generator -----------
@@ -224,68 +323,6 @@ $(function() {
   $('.bouncerBack').on('drag', function() {
     console.log("I'm Dragging")});
 
-
-
-
-/*
-  function dropEvent() { //what happens when you drop the draggable item on this square
-    $(this).removeClass('square ui-droppable').addClass('bounce');
-    var elId = parseInt(this.id);
-
-    if(elId <=5 ) {
-      arrayRow1.push(elId);
-      //masterArray[0].push(elId);
-      if(elId == 1) {
-          secondMoveRow.push("arrayRow1");
-      } else {
-        console.log('hmm');
-      }
-    }
-    else if(elId <=10 ) {
-    arrayRow2.push(elId - 5);
-      if(elId - 5 == 1) {
-        secondMoveRow.push("arrayRow2");
-      } else {
-        console.log('hmm');
-      }
-    }
-    else if(elId <=15 ) {
-    arrayRow3.push(elId - 10);
-      if(elId - 10 == 1) {
-        secondMoveRow.push("arrayRow3");
-      } else {
-        console.log('hmm');
-        }
-    }
-    else if(elId <=20 ) {
-    arrayRow4.push(elId - 15);
-      if(elId - 15 == 1) {
-        secondMoveRow.push("arrayRow4");
-      } else {
-        console.log('hmm');
-        }
-    }
-    else if(elId <=25 ) {
-    arrayRow5.push(elId - 20);
-      if(elId - 20 == 1) {
-        secondMoveRow.push("arrayRow5");
-      } else {
-        console.log('hmm');
-        }
-      }
-    else{
-      console.log('huh?');
-    }
-    secondMoveRow = secondMoveRow.sort();
-
-    arrayRow1 = arrayRow1.sort();
-    arrayRow2 = arrayRow2.sort();
-    arrayRow3 = arrayRow3.sort();
-    arrayRow4 = arrayRow4.sort();
-    arrayRow5 = arrayRow5.sort();
-    //we push to an arrayRow each time we hit a square, as well as push to an array called secondMoveRow with each row name.
-  }
-*/
 
 /*----- This  (below) is code for the forward Bumpers (orginal type)
 ------------------------------------------------------*/
@@ -310,10 +347,8 @@ $(function() {
   /*-------------------------------------------------------*/
   //////------Event Listeners and stuff that needs triggers --------------
 
-  $('.bouncerback').click(function() {
-    console.log("hello");
-  })
-  $('.ball').on('click', clickMove);
+  $('.ball').on('click', flightGenerator);
+
   ballMargin();
   dropBumper();
 })
