@@ -13,10 +13,10 @@ function marginAmount() {
   return oneFive;
 }
 
-var rowOrColumnNumber = marginAmount();
+var columnNumber = marginAmount(); //The ball starting row (1 - 5)
 
 function ballMargin() {
-  var pixelsMoved  = (rowOrColumnNumber)*104;
+  var pixelsMoved  = (columnNumber)*104;
   if(topOrSide == 0) {
     $(".ball").css('margin-left', 146 + (pixelsMoved));
   } else if(topOrSide == 1) {
@@ -51,10 +51,7 @@ function myHelperForward() {
 function myHelperBack() { //this is the drag-clone so you can do multiples]
   return '<div id=draggableHelperBack></div>';
 }
-$('.ball').on('click', function() {
-  console.log('hey there');
-});
-ballMargin();
+
 
 ///Start Code
 
@@ -67,7 +64,6 @@ function dropEvent() {
   } else {
     console.log("no class change");
   }
-  console.log("you dropped on square of id: " + squareId);
   switch (squareId) {
     case 1:
       console.log(squareId);
@@ -198,7 +194,66 @@ function dropEvent() {
   }
 }
 
+//-------------- Start Moves -----------
+
+function firstMove() {
+  //columnNumber //variable of start point
+  var thisRow = parseInt(columnNumber);
+  console.log("row is: "+thisRow);
+  var firstArray = [];
+  var createThisColArrayfun = function() {
+    for (var i = 0; i < 5; i++) {
+      var columnArrayPoint = boardArray[i][thisRow-1];
+      firstArray.push(columnArrayPoint);
+      console.log("it's here: "+columnArrayPoint);
+      console.log(firstArray);
+    }
+  }
+  var createThisColArray = createThisColArrayfun();
+  firstArray.sort();
+  console.log("the first (look for the 0 spot) array is: "+firstArray);
+  var firstNexusFun = function() {
+    if (firstArray[0]%5 === 0) {
+      return Math.floor(firstArray[0]/5);
+      console.log('row 5');
+    } else {
+      return (Math.floor(firstArray[0]/5)+1);
+    }
+  }
+  var firstNexus = firstNexusFun()
+  console.log("first bounce point is: "+ firstNexus);
+
+  console.log('which is ')
+  var distancePixels = 100 + (firstNexus-1)*104;
+  console.log('the distance should be: '+distancePixels);
+  return [distancePixels, 800, firstNexus];
+}
+
+function secondMove() {
+  var startingRowReturn = firstMove();
+  var startingRow = startingRowReturn[2];
+  console.log('turn two should start on: '+startingRow);
+}
 
 
+//---------------------End Moves
+
+function flightController() {
+  var first = firstMove();
+  var second = "";
+  var third = "";
+  var fourth = "";
+  $('.ball').animate({marginTop: first[0]},first[1], function(){
+    $(this).animate({marginLeft: second}, 300, function() {
+      $(this).animate({marginTop: third}, 300, function() {
+        $(this).animate({marginLeft: second}, 300);
+      })
+    })});
+  }
+
+  //clicks, events, and calls
+
+  $('.ball').on('click', flightController);
+  ballMargin();
 //end of jquery
 })
