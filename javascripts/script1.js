@@ -202,7 +202,14 @@ $(function() {
 
   function firstMovement() {
  //try to use this to chain moves
-    var moveRowString = secondMove[0].toString();
+    var moveStringArray = function() {
+      if(secondMove.length > 0) {
+        return secondMove[0];
+      } else {
+        return 999;
+      }
+    }
+    var moveRowString = moveStringArray().toString();
     console.log(moveRowString);
 
     var moveRowArray = moveRowString.split('');
@@ -213,8 +220,11 @@ $(function() {
 
     var firstMovement = moveRow*104;
     console.log(firstMovement);
-
-    return firstMovement;
+    if(moveRowString == 999) {
+      return 10000;
+    } else {
+      return firstMovement;
+    }
   }
 
   function secondMovement() {
@@ -431,9 +441,8 @@ $(function() {
     var theRow = secondMove[0];
     var nextMove = thirdMove[1];
     var fromLeftOrRight = theColumn - rowOrColumnNumber;
-    console.log("the next move will ping off of column(up down): "+theRow+"; and row: "+theColumn+", bouncing in a the direction of: " + nextMove);
+    console.log("the upDown column for move three will be: " + theColumn+ " the row (sideside) of this point will be: "+theRow);
     console.log(fromLeftOrRight);
-
 
     //var nextArray = //array of all the bounced squares in this column
     if(nextMove == "fromForward" && fromLeftOrRight > 0) {
@@ -479,30 +488,17 @@ $(function() {
 
   function flightController() {
     var first = firstMovement();
+    var firstTime = first/2;
     var second = secondMovement();
+    var secondTime = second/2;
     var third = thirdMovement();
     var fourth = fourthMovement();
-    $('.ball').animate({marginTop: first},300, function(){
-      $(this).animate({marginLeft: second}, 200, function() {
-        $(this).animate({marginTop: third}, 500, function() {
+    $('.ball').animate({marginTop: first},firstTime, function(){
+      $(this).animate({marginLeft: second}, secondTime, function() {
+        $(this).animate({marginTop: third}, 400, function() {
           $(this).animate({marginLeft: second}, 500);
         })
       })});
-    /*
-    console.log('are we flying?');
-    console.log('original counter is: ' +counter);
-    for (var i = 0; i < 10; i++) {
-      if(counter == 0) {
-        firstMove()
-        console.log("counter is: " + counter);
-      } else if(counter == 1) {
-        secondMovement();
-      } else {
-        console.log("and beyond x 8 or so.")
-      }
-      console.log("counter is: " +counter);
-      }
-      */
     }
 
 
