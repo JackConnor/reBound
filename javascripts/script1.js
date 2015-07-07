@@ -1,4 +1,5 @@
 
+///old version, but works when plugged into index.html
 $(function() {
   var x = 0;
   var y = 0;

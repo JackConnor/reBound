@@ -1,3 +1,5 @@
+//Work in Progress, first move works now on all 5 columns
+
 $(function() {
 
 var counter = 0;
