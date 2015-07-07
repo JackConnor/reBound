@@ -234,6 +234,7 @@ function firstMove() {
 
 function secondMove() {
   var lastMoveInfo = firstMove();
+  console.log("leg one flew: "+ lastMoveInfo);
   var bounceId = parseInt(((lastMoveInfo[3][0])*5) + lastMoveInfo[3][1]);
   console.log("the id of the move two start should be: "+bounceId);
   var backOrForward = document.getElementById(bounceId);
@@ -252,7 +253,6 @@ function secondMove() {
   var direction = directionFun();
   console.log("we're going: "+direction);
 
-
   var secondMoveArray = boardArray[lastMoveInfo[3][0]];
   console.log("squares in the second move should be: " +secondMoveArray);
 
@@ -268,7 +268,7 @@ function secondMove() {
         return secondMoveArray[columnNumber-1] -secondMoveArray[columnNumber-5];
       } else {
         console.log("rest of the row is empty");
-        return 50;
+        return 10;
       }
     }
 
@@ -283,31 +283,19 @@ function secondMove() {
         return  secondMoveArray[columnNumber-1] - secondMoveArray[columnNumber+3];
       } else {
         console.log("rest of the row is empty");
-        return 50;
+        return -10;
       }
+    }
   }
-}
   var nextSquareDistanceSpaces = nextSquareFun();
   console.log(nextSquareDistanceSpaces);
   console.log("the filled squares in this array are: "+secondMoveArray);
   var nextDistance = 250 + ((columnNumber-1)*104) - (nextSquareDistanceSpaces*104);
   console.log("move two we're traveling: " + nextDistance+ "pxs");
-    /*
-  //var classTest = document.getElementById(parseInt('15'));
-  //console.log('square 15 should have a class of: '+ classTest.className);
-  //point in array for our ball will be the first non-null (columnNumber-1) in the row array
-  var tensPlaceFun = function() {
-    startingRow*5
-  }
-  var tensPlace = tensPlaceFun();
-  console.log('id fives place should be: '+ tensPlace);
-  console.log("the row of the bounce point ID is: " + parseInt(tensPlace)/5);
-  var onesPlace = columnNumber-1;
-  console.log(" the next bounce point's id should be: "+ tensPlace+ "It's one's place should be: "+ onesPlace);
-  var nextBounceId = parseInt(startingRow*5) + parseInt(columnNumber-1);
-  console.log("next bounce id is.........: "+ nextBounceId);
-  */
-  var secondMovement = [nextDistance,null,direction,[]];
+
+  var secondMovement = [nextDistance,300,direction,[ parseInt(lastMoveInfo[2][0]), parseInt(columnNumber - nextSquareDistanceSpaces - 1)]];
+  console.log(secondMovement);
+  console.log("this move went to left-margin: "+(secondMovement[0]+ " in a direction of: "+direction+ " to land at row: "+ secondMovement[2][0])+" and point: "+(secondMovement[2][1]));
   return secondMovement;
 }
 
@@ -320,7 +308,7 @@ function flightController() {
   var third = "";
   var fourth = "";
   $('.ball').animate({marginTop: first[0]},first[1], function(){
-    $(this).animate({marginLeft: second[0]}, 300, function() {
+    $(this).animate({marginLeft: second[0]}, second[1], function() {
       $(this).animate({marginTop: first[0]}, 300, function() {
         $(this).animate({marginLeft: second[0]}, 300);
       })
