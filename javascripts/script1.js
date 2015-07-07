@@ -20,7 +20,7 @@ $(function() {
   var arrayFour = [];
   var arrayFive = [];
 
-  var topOrSide = (Math.floor(Math.random()*1/*should be times 2, but I'm cutting off side for now  */
+  var topOrSide = (Math.floor(Math.random()*1
   )); //for initial ball placement on top or side;
 
   function marginAmount() {
@@ -28,12 +28,6 @@ $(function() {
     console.log("the starting row is: " + oneFive);
     return oneFive;
   }
-    /*
-    if(oneFive == 5){
-      return (Math.floor(Math.random()*4)+1) //this is to temporarily take out the fifth column until we get it working
-    }
-    return oneFive;
-  }*/
 
   var rowOrColumnNumber = marginAmount(); // this var is a # (1 - 5) will be the row or column number the ball is place at
 
@@ -95,6 +89,7 @@ $(function() {
         if(rowNum === 1){
           if(rowPlace == rowOrColumnNumber/*registers strt row*/) {
             secondMove.push(rowNum);
+            //arrayOne.push(rowPlace);
             arrayOne.push(rowPlace);
           }
           else {
@@ -437,13 +432,32 @@ $(function() {
 //thirdMove[0]= third move's starting row
 //thirdMove[1] = "fromForward" or "fromBack"
 //currently just forward to forward works
-    var theColumn = thirdMove[0]; //not filtered for 'a'
-    var theRow = secondMove[0];
+    var theColumn = thirdMove[0];
+    var rowFilter = function() {
+      if((secondMove[0]/secondMove[0])==1) {
+        return secondMove[0];
+      } else {
+        var array = secondMove[0].split('');
+        return array[0];
+      }
+    };
+      //not filtered for 'a'
+    var theRow = rowFilter();
     var nextMove = thirdMove[1];
     var fromLeftOrRight = theColumn - rowOrColumnNumber;
     console.log("the upDown column for move three will be: " + theColumn+ " the row (sideside) of this point will be: "+theRow);
     console.log(fromLeftOrRight);
-
+    for (var i = 0; i < 5; i++) {
+      var thing = arrayOne[i];
+      var backThing = arrayOne[i]+"a";
+      console.log("new array "+thing);
+      if (thing/thing == 1) {
+        fourthMove.push(thing);
+      } else {
+        fourthMove.push(backThing);
+      }
+    }
+    console.log("fourth move is: "+fourthMove);
     //var nextArray = //array of all the bounced squares in this column
     if(nextMove == "fromForward" && fromLeftOrRight > 0) {
       return -1000;
@@ -488,9 +502,9 @@ $(function() {
 
   function flightController() {
     var first = firstMovement();
-    var firstTime = first/2;
+    var firstTime = first;
     var second = secondMovement();
-    var secondTime = second/2;
+    var secondTime = second;
     var third = thirdMovement();
     var fourth = fourthMovement();
     $('.ball').animate({marginTop: first},firstTime, function(){
