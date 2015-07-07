@@ -242,11 +242,57 @@ function secondMove() {
   var nameArray = borFClass.split(' ').reverse();
   var borF = nameArray[0];
   console.log(borF);
-    /*
-  var startingRow = parseInt(startingRowReturn[3]);
-  console.log('turn two should start on: '+startingRow);
-  var secondMoveArray = boardArray[startingRow-1];
+  var directionFun = function() {
+    if(borF == "bounceForward") {
+      return "left";
+    } else {
+      return "right";
+    }
+  }
+  var direction = directionFun();
+  console.log("we're going: "+direction);
+
+
+  var secondMoveArray = boardArray[lastMoveInfo[3][0]];
+  console.log("squares in the second move should be: " +secondMoveArray);
+
+  var nextSquareFun = function() {
+    if(direction == "left"){
+      if((secondMoveArray[columnNumber-2])/(secondMoveArray[columnNumber-2]) === 1) {
+        return  secondMoveArray[columnNumber-1] - secondMoveArray[columnNumber-2];
+      } else if ((secondMoveArray[columnNumber-3])/(secondMoveArray[columnNumber-3]) === 1) {
+        return secondMoveArray[columnNumber-1] -secondMoveArray[columnNumber-3];
+      } else if ((secondMoveArray[columnNumber-4])/(secondMoveArray[columnNumber-4]) === 1) {
+        return secondMoveArray[columnNumber-1] -secondMoveArray[columnNumber-4];
+      } else if ((secondMoveArray[columnNumber-5])/(secondMoveArray[columnNumber-5]) === 1) {
+        return secondMoveArray[columnNumber-1] -secondMoveArray[columnNumber-5];
+      } else {
+        console.log("rest of the row is empty");
+        return 50;
+      }
+    }
+
+    else if(direction == "right") {
+      if((secondMoveArray[columnNumber])/(secondMoveArray[columnNumber]) === 1) {
+        return secondMoveArray[columnNumber-1] - secondMoveArray[columnNumber];
+      } else if  ((secondMoveArray[columnNumber+1])/(secondMoveArray[columnNumber+1]) === 1) {
+        return   secondMoveArray[columnNumber-1] - secondMoveArray[columnNumber+1];
+      } else if  ((secondMoveArray[columnNumber+2])/(secondMoveArray[columnNumber+2]) === 1) {
+        return   secondMoveArray[columnNumber-1] - secondMoveArray[columnNumber+2];
+      } else if  ((secondMoveArray[columnNumber+3])/(secondMoveArray[columnNumber+3]) === 1) {
+        return  secondMoveArray[columnNumber-1] - secondMoveArray[columnNumber+3];
+      } else {
+        console.log("rest of the row is empty");
+        return 50;
+      }
+  }
+}
+  var nextSquareDistanceSpaces = nextSquareFun();
+  console.log(nextSquareDistanceSpaces);
   console.log("the filled squares in this array are: "+secondMoveArray);
+  var nextDistance = 250 + ((columnNumber-1)*104) - (nextSquareDistanceSpaces*104);
+  console.log("move two we're traveling: " + nextDistance+ "pxs");
+    /*
   //var classTest = document.getElementById(parseInt('15'));
   //console.log('square 15 should have a class of: '+ classTest.className);
   //point in array for our ball will be the first non-null (columnNumber-1) in the row array
@@ -260,7 +306,9 @@ function secondMove() {
   console.log(" the next bounce point's id should be: "+ tensPlace+ "It's one's place should be: "+ onesPlace);
   var nextBounceId = parseInt(startingRow*5) + parseInt(columnNumber-1);
   console.log("next bounce id is.........: "+ nextBounceId);
-*/
+  */
+  var secondMovement = [nextDistance,null,direction,[]];
+  return secondMovement;
 }
 
 
@@ -272,9 +320,9 @@ function flightController() {
   var third = "";
   var fourth = "";
   $('.ball').animate({marginTop: first[0]},first[1], function(){
-    $(this).animate({marginLeft: second}, 300, function() {
-      $(this).animate({marginTop: third}, 300, function() {
-        $(this).animate({marginLeft: second}, 300);
+    $(this).animate({marginLeft: second[0]}, 300, function() {
+      $(this).animate({marginTop: first[0]}, 300, function() {
+        $(this).animate({marginLeft: second[0]}, 300);
       })
     })});
   }
