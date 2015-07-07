@@ -61,6 +61,7 @@ function dropEvent() {
   var squareId = parseInt(this.id);
   if(counter == 0){
     $(this).addClass('bounceForward');
+    $(this).addId
   } else if(counter == 1) {
     $(this).addClass('bounceBack');
   } else {
@@ -194,21 +195,18 @@ function dropEvent() {
       break;
     default: console.log('nope');
   }
+  console.log(this);
+  return this;
 }
 
 //-------------- Start Moves -----------
 
 function firstMove() {
-  //columnNumber //variable of start point
-  var thisRow = parseInt(columnNumber);
-  console.log("row is: "+thisRow);
   var firstArray = [];
   var createThisColArrayfun = function() {
     for (var i = 0; i < 5; i++) {
-      var columnArrayPoint = boardArray[i][thisRow-1];
+      var columnArrayPoint = boardArray[i][parseInt(columnNumber)-1];
       firstArray.push(columnArrayPoint);
-      console.log("it's here: "+columnArrayPoint);
-      console.log(firstArray);
     }
   }
   var createThisColArray = createThisColArrayfun();
@@ -217,24 +215,43 @@ function firstMove() {
   var firstNexusFun = function() {
     if (firstArray[0]%5 === 0) {
       return Math.floor(firstArray[0]/5);
-      console.log('row 5');
+      //console.log('row 5');
     } else {
       return (Math.floor(firstArray[0]/5)+1);
     }
-  }
-  var firstNexus = firstNexusFun()
-  console.log("first bounce point is: "+ firstNexus);
+  }//this function deals with the zero issue
+  var firstNexus = firstNexusFun();
+  //console.log("first bounce point is: "+ firstNexus);
 
-  console.log('which is ')
   var distancePixels = 100 + (firstNexus-1)*104;
-  console.log('the distance should be: '+distancePixels);
-  return [distancePixels, 800, firstNexus];
+  //console.log('the distance should be: '+distancePixels);
+  return [distancePixels, 800, "down", firstNexus];
 }
 
 function secondMove() {
   var startingRowReturn = firstMove();
-  var startingRow = startingRowReturn[2];
+  var startingRow = parseInt(startingRowReturn[3]);
   console.log('turn two should start on: '+startingRow);
+  var secondMoveArray = boardArray[startingRow-1];
+  console.log("the filled squares in this array are: "+secondMoveArray);
+  //var classTest = document.getElementById(parseInt('15'));
+  //console.log('square 15 should have a class of: '+ classTest.className);
+  //point in array for our ball will be the first non-null (columnNumber-1) in the row array
+  var tensPlaceFun = function() {
+    if(startingRow == 5) {
+      return (startingRow-1)*5;
+    } else {
+      return (startingRow-1)*5;
+    }
+  }
+  var tensPlace = tensPlaceFun();
+  console.log('id fives place should be: '+ tensPlace);
+  console.log("the row of the bounce point ID is: " + parseInt(tensPlace)/5);
+  /*var onesPlace = columnNumber-1;
+  console.log(" the next bounce point's id should be: "+ tensPlace+ "It's one's place should be: "+ onesPlace);
+  var nextBounceId = parseInt(startingRow*5) + parseInt(columnNumber-1);
+  console.log("next bounce id is.........: "+ nextBounceId);
+*/
 }
 
 
@@ -242,7 +259,7 @@ function secondMove() {
 
 function flightController() {
   var first = firstMove();
-  var second = "";
+  var second = secondMove();
   var third = "";
   var fourth = "";
   $('.ball').animate({marginTop: first[0]},first[1], function(){
@@ -257,5 +274,6 @@ function flightController() {
 
   $('.ball').on('click', flightController);
   ballMargin();
+
 //end of jquery
 })
