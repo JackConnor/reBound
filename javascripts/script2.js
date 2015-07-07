@@ -1,3 +1,5 @@
+//Work in Progress, first move works now on all 5 columns
+
 $(function() {
 
 var counter = 0;
@@ -8,12 +10,13 @@ var topOrSide = (Math.floor(Math.random()*1
 )); //for initial ball placement on top or side;
 
 function marginAmount() {
-  var oneFive = Math.floor((Math.random()*5)+1);
-  console.log("the starting row is: " + oneFive);
-  return oneFive;
+  var zeroToFour = Math.floor((Math.random()*5)+1);
+  return zeroToFour;
 }
 
-var columnNumber = marginAmount(); //The ball starting row (1 - 5)
+var columnNumber = parseInt(marginAmount());
+console.log("the starting row is: " + columnNumber); //The ball starting row (1 - 5)
+//note: column number is only thing not on 0-4 spectrum
 
 function ballMargin() {
   var pixelsMoved  = (columnNumber)*104;
@@ -59,180 +62,205 @@ function dropEvent() {
   var squareId = parseInt(this.id);
   if(counter == 0){
     $(this).addClass('bounceForward');
+
   } else if(counter == 1) {
     $(this).addClass('bounceBack');
   } else {
     console.log("no class change");
   }
   switch (squareId) {
-    case 1:
+    case 0:
       console.log(squareId);
       boardArray[0][0] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 2:
+    case 1:
       console.log(squareId);
       boardArray[0][1] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 3:
+    case 2:
       console.log(squareId);
       boardArray[0][2] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 4:
+    case 3:
       console.log(squareId);
       boardArray[0][3] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 5:
+    case 4:
       console.log(squareId);
       boardArray[0][4] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 6:
+    case 5:
       console.log(squareId);
       boardArray[1][0] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 7:
+    case 6:
       console.log(squareId);
       boardArray[1][1] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 8:
+    case 7:
       console.log(squareId);
       boardArray[1][2] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 9:
+    case 8:
       console.log(squareId);
       boardArray[1][3] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 10:
+    case 9:
       console.log(squareId);
       boardArray[1][4] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 11:
+    case 10:
       console.log(squareId);
       boardArray[2][0] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 12:
+    case 11:
       console.log(squareId);
       boardArray[2][1] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 13:
+    case 12:
       console.log(squareId);
       boardArray[2][2] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 14:
+    case 13:
       console.log(squareId);
       boardArray[2][3] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 15:
+    case 14:
       console.log(squareId);
       boardArray[2][4] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 16:
+    case 15:
       console.log(squareId);
       boardArray[3][0] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 17:
+    case 16:
       console.log(squareId);
       boardArray[3][1] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 18:
+    case 17:
       console.log(squareId);
       boardArray[3][2] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 19:
+    case 18:
       console.log(squareId);
       boardArray[3][3] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 20:
+    case 19:
       console.log(squareId);
       boardArray[3][4] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 21:
+    case 20:
       console.log(squareId);
       boardArray[4][0] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 22:
+    case 21:
       console.log(squareId);
       boardArray[4][1] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 23:
+    case 22:
       console.log(squareId);
       boardArray[4][2] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 24:
+    case 23:
       console.log(squareId);
       boardArray[4][3] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
-    case 25:
+    case 24:
       console.log(squareId);
       boardArray[4][4] = squareId;
       console.log("the board array is: "+ boardArray);
       break;
     default: console.log('nope');
   }
+  console.log(this);
+  console.log("our start point shoudl be: "+ (columnNumber-1));
+  return this;
 }
 
 //-------------- Start Moves -----------
 
 function firstMove() {
-  //columnNumber //variable of start point
-  var thisRow = parseInt(columnNumber);
-  console.log("row is: "+thisRow);
   var firstArray = [];
+  console.log("starting column number is: "+ (columnNumber-1));
   var createThisColArrayfun = function() {
     for (var i = 0; i < 5; i++) {
-      var columnArrayPoint = boardArray[i][thisRow-1];
-      firstArray.push(columnArrayPoint);
-      console.log("it's here: "+columnArrayPoint);
-      console.log(firstArray);
+      var columnArrayPoint = parseInt(boardArray[i][columnNumber-1]);
+      if((columnArrayPoint/columnArrayPoint) === 1) {
+      firstArray.push(parseInt(columnArrayPoint));
+      } else {
+      }
     }
   }
   var createThisColArray = createThisColArrayfun();
-  firstArray.sort();
+  console.log('the array for this starting row: '+firstArray);
   console.log("the first (look for the 0 spot) array is: "+firstArray);
   var firstNexusFun = function() {
-    if (firstArray[0]%5 === 0) {
-      return Math.floor(firstArray[0]/5);
-      console.log('row 5');
-    } else {
-      return (Math.floor(firstArray[0]/5)+1);
-    }
-  }
-  var firstNexus = firstNexusFun()
-  console.log("first bounce point is: "+ firstNexus);
+      return ((firstArray[0] - firstArray[0]%5)/5);
+  }//this function deals with the zero issue
+  var firstNexus = firstNexusFun();
+  console.log("first bounce point is this many spaces down: "+ firstNexus);
 
-  console.log('which is ')
-  var distancePixels = 100 + (firstNexus-1)*104;
+  var distancePixels = 100 + (firstNexus)*104;
   console.log('the distance should be: '+distancePixels);
-  return [distancePixels, 800, firstNexus];
+  var firstMovement =  [distancePixels, 800, "down", [firstNexus, columnNumber-1]];
+  console.log(firstMovement[3]);
+  return firstMovement;
 }
 
+
 function secondMove() {
-  var startingRowReturn = firstMove();
-  var startingRow = startingRowReturn[2];
+  var lastMoveInfo = firstMove();
+  var bounceId = parseInt(((lastMoveInfo[3][0])*5) + lastMoveInfo[3][1]);
+  console.log("the id of the move two start should be: "+bounceId);
+  var backOrForward = document.getElementById(bounceId);
+  var borFClass = backOrForward.className;
+  console.log(borFClass);
+  var nameArray = borFClass.split(' ').reverse();
+  var borF = nameArray[0];
+  console.log(borF);
+    /*
+  var startingRow = parseInt(startingRowReturn[3]);
   console.log('turn two should start on: '+startingRow);
+  var secondMoveArray = boardArray[startingRow-1];
+  console.log("the filled squares in this array are: "+secondMoveArray);
+  //var classTest = document.getElementById(parseInt('15'));
+  //console.log('square 15 should have a class of: '+ classTest.className);
+  //point in array for our ball will be the first non-null (columnNumber-1) in the row array
+  var tensPlaceFun = function() {
+    startingRow*5
+  }
+  var tensPlace = tensPlaceFun();
+  console.log('id fives place should be: '+ tensPlace);
+  console.log("the row of the bounce point ID is: " + parseInt(tensPlace)/5);
+  var onesPlace = columnNumber-1;
+  console.log(" the next bounce point's id should be: "+ tensPlace+ "It's one's place should be: "+ onesPlace);
+  var nextBounceId = parseInt(startingRow*5) + parseInt(columnNumber-1);
+  console.log("next bounce id is.........: "+ nextBounceId);
+*/
 }
 
 
@@ -240,7 +268,7 @@ function secondMove() {
 
 function flightController() {
   var first = firstMove();
-  var second = "";
+  var second = secondMove();
   var third = "";
   var fourth = "";
   $('.ball').animate({marginTop: first[0]},first[1], function(){
@@ -255,5 +283,6 @@ function flightController() {
 
   $('.ball').on('click', flightController);
   ballMargin();
+
 //end of jquery
 })
