@@ -60,6 +60,13 @@ ballMargin();
 
 function dropEvent() {
   var squareId = parseInt(this.id);
+  if(counter == 0){
+    $(this).addClass('bounceForward');
+  } else if(counter == 1) {
+    $(this).addClass('bounceBack');
+  } else {
+    console.log("no class change");
+  }
   console.log("you dropped on square of id: " + squareId);
   switch (squareId) {
     case 1:
