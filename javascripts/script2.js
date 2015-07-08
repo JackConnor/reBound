@@ -205,7 +205,6 @@ function dropEvent() {
 
 function firstMove() {
   var firstArray = [];
-  console.log("starting column number is: "+ (columnNumber-1));
   var createThisColArrayfun = function() {
     for (var i = 0; i < 5; i++) {
       var columnArrayPoint = parseInt(boardArray[i][columnNumber-1]);
@@ -216,18 +215,12 @@ function firstMove() {
     }
   }
   var createThisColArray = createThisColArrayfun();
-  console.log('the array for this starting row: '+firstArray);
-  console.log("the first (look for the 0 spot) array is: "+firstArray);
   var firstNexusFun = function() {
       return ((firstArray[0] - firstArray[0]%5)/5);
   }//this function deals with the zero issue
   var firstNexus = firstNexusFun();
-  console.log("first bounce point is this many spaces down: "+ firstNexus);
-
   var distancePixels = 100 + (firstNexus)*104;
-  console.log('the distance should be: '+distancePixels);
   var firstMovement =  [distancePixels, 800, "down", [firstNexus, columnNumber-1]];
-  console.log(firstMovement[3]);
   return firstMovement;
 }
 
@@ -293,23 +286,117 @@ function secondMove() {
   var nextDistance = 250 + ((columnNumber-1)*104) - (nextSquareDistanceSpaces*104);
   console.log("move two we're traveling: " + nextDistance+ "pxs");
 
-  var secondMovement = [nextDistance,300,direction,[ parseInt(lastMoveInfo[2][0]), parseInt(columnNumber - nextSquareDistanceSpaces - 1)]];
+  var secondMovement = [nextDistance,300,direction,[parseInt(columnNumber - nextSquareDistanceSpaces - 1),  parseInt(lastMoveInfo[3][0])]];
   console.log(secondMovement);
-  console.log("this move went to left-margin: "+(secondMovement[0]+ " in a direction of: "+direction+ " to land at row: "+ secondMovement[2][0])+" and point: "+(secondMovement[2][1]));
+  console.log("this move went to left-margin: "+(secondMovement[0]+ " in a direction of: "+direction+ " to land at point: "+ secondMovement[3][0])+" in row: "+(secondMovement[3][1]));
   return secondMovement;
 }
 
+ function thirdMove() {
+   var secondLast = secondMove();
+   var thirdStartingX = parseInt(secondLast[3][0]);
+   console.log(thirdStartingX);
+   var thirdStartingY = parseInt(secondLast[3][1]);
+   console.log("third row column should be: " + parseInt(secondLast[3][0])+ " in the row "+secondLast[3][1]);
+   var nexusId = (thirdStartingY*5)+(thirdStartingX);
+   console.log("the id of the 3rd square launch point is: " + nexusId);
+   var squareObject = document.getElementById(parseInt(nexusId));
+   console.log(squareObject.className);
+   var squareName = squareObject.className;
+   console.log(squareName);
+   var refinedNameFind = squareName.split(' ').reverse();
+   var refinedName = refinedNameFind[0];
+   console.log("third move square should be " + refinedName);
 
+   var thirdArray = [];
+   var createThisColArrayfun = function() {
+     for (var i = 0; i < 5; i++) {
+       var columnArrayPoint = parseInt(boardArray[i][thirdStartingX]);
+       if((columnArrayPoint/columnArrayPoint) === 1) {
+       thirdArray.push(columnArrayPoint);
+       console.log("pushed columnArrayPoint: "+columnArrayPoint+" to the array "+thirdArray);
+       } else {
+       }
+     }
+     return thirdArray;
+   }
+   createThisColArrayfun();
+   console.log('third array moves(top to bottom) are: '+thirdArray);
+   var upOrDown = function() {
+     if(refinedName === "bounceBack" && secondLast[2] == "left") {
+       return "up";
+     } else if(refinedName === "bounceBack" && secondLast[2] == "right"){
+       return "down";
+     } else if(refinedName === "bounceForward" && secondLast[2] == "left"){
+       return "down";
+     } else if(refinedName === "bounceForward" && secondLast[2] == "right"){
+       return "up";
+     } else {
+       console.log("suck it");
+     }
+   }
+   var direction = upOrDown();
+   console.log(direction);
+   var indexPoint = thirdArray.indexOf(nexusId);//index of starting point in new array of move two
+   console.log("last move was: "+ secondLast[2]);
+   var distanceSpacesFind = function() {
+     if(direction == "down") {
+       if(indexPoint+1 < thirdArray.length) {
+         return thirdArray[indexPoint+1];
+         } else {
+           return 10;
+         }
+       }
+    else if(direction == "up"){
+       if(indexPoint-1 > 0) {
+         return thirdArray[indexPoint-1];
+       } else {
+         return -10;
+       }
+   } else {
+     console.log("couldn't find the next point");
+   }
+ }
+   var distanceSpacesunFiltered = distanceSpacesFind(); //id of next target
+   //var distanceSpaces =
+   console.log("the next move id is: "+distanceSpacesunFiltered);
+   console.log("the id of the third land-square square should be: "+nexusId)
+
+   var nextRowFun = function() {
+     if(nexusId%nexusId == nexusId || nexusId === 5) {
+       return 1;
+     } else {
+      return ((nexusId - nexusId%5)/5);
+     }
+  }
+   var nextRow = nextRowFun();
+   console.log("next row should be: " +nextRow);
+   console.log("turn three start row is: "+ (secondLast[3][1]));
+   var travelDistanceFun = "";//next point - current point
+
+  /*
+   var createThisColArray = createThisColArrayfun();
+   var firstNexusFun = function() {
+       return ((firstArray[0] - firstArray[0]%5)/5);
+   }//this function deals with the zero issue
+   var firstNexus = firstNexusFun();
+   var distancePixels = 100 + (firstNexus)*104;
+   var firstMovement =  [distancePixels, 800, "down", [firstNexus, columnNumber-1]];
+   return firstMovement;
+   */
+
+   return [1000, 400, null, [null, null]];
+ }
 //---------------------End Moves
 
 function flightController() {
   var first = firstMove();
   var second = secondMove();
-  var third = "";
+  var third = thirdMove();
   var fourth = "";
   $('.ball').animate({marginTop: first[0]},first[1], function(){
     $(this).animate({marginLeft: second[0]}, second[1], function() {
-      $(this).animate({marginTop: first[0]}, 300, function() {
+      $(this).animate({marginTop: third[0]}, 300, function() {
         $(this).animate({marginLeft: second[0]}, 300);
       })
     })});
