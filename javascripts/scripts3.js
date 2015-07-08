@@ -4,6 +4,7 @@ $(function() {
 
 var counter = 0;
 
+
 var boardArrayDown = [[null,null,null,null,null],[null,null,null,null,null],[null,null,null,null,null],[null,null,null,null,null],[null,null,null,null,null]];
 
 var boardArrayAcross = [[null,null,null,null,null],[null,null,null,null,null],[null,null,null,null,null],[null,null,null,null,null],[null,null,null,null,null]];
@@ -234,6 +235,7 @@ function dropEvent() {
 
 function holyShit() {
   var moves = [];
+  var movesMargin = [];
   ///move one calculations (that go into our presets) go here
   var startX = acrossStart-1;
   console.log(startX);
@@ -242,7 +244,12 @@ function holyShit() {
   var currentMoveStartPoint = [startX, startY];
   var thisMoveDirection = "south";
   for (var i = 0; i < 10; i++) {
-
+    /*
+  var leftMargin = 250 + ((acrossStart-1)*104);
+  var topMargin = 0;
+  console.log("left margin is: "+ leftMargin);
+  console.log("top margin is: "+ topMargin);
+*/
     if(i%2 === 0) { ///start the engine
 
       ///downs and ups go here
@@ -253,16 +260,20 @@ function holyShit() {
           for(j=1; j < x.length+1; j++) {
             if((x[currentMoveStartPoint[1]+j]/x[currentMoveStartPoint[1]+j]) === 1) {
               return x[currentMoveStartPoint[1]+j];
-            } else {
+            } else if ((x[currentMoveStartPoint[1]+j]/x[currentMoveStartPoint[1]+j]) === null){
               console.log("nada");
+            } else {
+              console.log("we're outta here");
             }
           }
         } else if(thisMoveDirection == "north") {
           for(j=1; j < x.length+1; j++) {
             if((x[currentMoveStartPoint[1]-j]/x[currentMoveStartPoint[1]-j]) === 1) {
               return x[currentMoveStartPoint[1]-j];
-            } else {
+            } else if ((x[currentMoveStartPoint[1]-j]/x[currentMoveStartPoint[1]-j]) === null){
               console.log("nada");
+            } else {
+              console.log("we're outta here");
             }
           }
         }
@@ -270,6 +281,13 @@ function holyShit() {
       }
       var nextId = nextIdFun(); ////returns ID of next north/south
       console.log(nextId);
+      if(nextId/nextId == 1) {
+      console.log("we got a bumper up ahead");
+      } else {
+        console.log("road is totally barren, we're going for the win!!!");
+        i=11;
+        return movesMargin;
+      }
       ////---finish finding ID of target, begin finding class
       var targetClass = document.getElementById(nextId).className.split(' ').reverse()[0]; //returns class of target
       console.log('next element is: '+targetClass);
@@ -321,7 +339,9 @@ function holyShit() {
       var distanceSpaces = distanceSpacesFun();
       console.log("the distance to the next target is: "+distanceSpaces);
       var distancePixels = distanceSpaces*104;
-      moves.push(distancePixels);
+      var nextMoveMargin = 104 + (nextPoint[1]*104);  
+      moves.push(distancePixels); 
+      movesMargin.push(nextMoveMargin);
       console.log('distance to next point is: '+distancePixels);
       ///I think I've found all my down info
       currentMoveStartPoint = nextPoint;
@@ -329,7 +349,9 @@ function holyShit() {
       thisMoveDirection = nextDirection;
       console.log("feeding this direction, too: "+thisMoveDirection);
       console.log("our moves so far: "+moves);
-      console.log("ONTO MOVE NUMBER "+ parseInt(i)+2);
+      console.log("our moves margins are: "+movesMargin);
+
+      console.log("ONTO MOVE NUMBER "+ (i+1));
 
     } else if(i%2 === 1){
       console.log("move should go " +thisMoveDirection+ "and start at: "+ currentMoveStartPoint);
@@ -341,23 +363,35 @@ function holyShit() {
           for(j=1; j < x.length+1; j++) {
             if((x[currentMoveStartPoint[0]+j]/x[currentMoveStartPoint[0]+j]) === 1) {
               return x[currentMoveStartPoint[0]+j];
-            } else {
+            } else if ((x[currentMoveStartPoint[0]+j]/x[currentMoveStartPoint[0]+j]) === null){
               console.log("nada");
+            } else {
+              console.log("We're outta here!");
             }
           }
         } else if(thisMoveDirection == "west") {
           for(j=1; j < x.length+1; j++) {
             if((x[currentMoveStartPoint[0]-j]/x[currentMoveStartPoint[0]-j]) === 1) {
               return x[currentMoveStartPoint[0]-j];
-            } else {
+            } else if ((x[currentMoveStartPoint[0]-j]/x[currentMoveStartPoint[0]-j]) === null){
               console.log("nada");
+            } else {
+              console.log("we're outta here");
             }
           }
         }
         //ideal place for cutoff switch
+ 
       }
       var nextId = nextIdFun(); ////returns ID of next north/south
       console.log(nextId);
+      if(nextId/nextId == 1) {
+        console.log("we got a bumper up ahead");
+      } else {
+        console.log("road is totally barren, we're going for the win!!!");
+        i=11;
+        return movesMargin;
+      }
       ////---finish finding ID of target, begin finding class
       var targetClass = document.getElementById(nextId).className.split(' ').reverse()[0]; //returns class of target
       console.log('next element is: '+targetClass);
@@ -410,6 +444,8 @@ function holyShit() {
       console.log("the distance to the next target is: "+distanceSpaces);
       var distancePixels = distanceSpaces*104;
       moves.push(distancePixels);
+      var nextMoveMargin = 250 + (nextPoint[0]*104); 
+      movesMargin.push(nextMoveMargin); 
       console.log('distance to next point is: '+distancePixels);
       ///I think I've found all my down info
       currentMoveStartPoint = nextPoint;
@@ -417,6 +453,7 @@ function holyShit() {
       thisMoveDirection = nextDirection;
       console.log("feeding this direction, too: "+thisMoveDirection);
       console.log("our moves so far: "+moves);
+      console.log("our moves margins are: "+movesMargin);
       console.log("ONTO MOVE NUMBER "+ parseInt(i)+2);
 
 
@@ -428,57 +465,25 @@ function holyShit() {
     ////end for looop
   }
   ////final calls to flight controller go here
-  return moves;
+
+  return movesMargin;
 }
-
-/*
-
-    //----- to find the id
-    var rowOrColumnShortFunc = function(i) {
-      for (var j = 0; j < 5; j++) { //first we condense array
-        var thisMoveArray = [];
-        if (i%2 === 0) {
-          var x = (boardArrayAcross[i][5]);
-
-          if((x/x) === 1) {
-            thisMoveArray.push(x);
-          } else {
-            console.log("red flag over here");
-          }
-        }
-        else if (i%2 === 1){
-          var x =  parseInt(boardArrayAcross[i][parseInt(currentMoveStartPoint[0])]);
-          console.log("we found one at: "+ x);
-          if((x/x) === 1) {
-            thisMoveArray.push(x);
-          } else {
-            console.log("got one");
-          }
-        }
-      }
-      console.log("the array for the next turn should be: "+thisMoveArray);
-      return thisMoveArray;
-    }
-  }
-
-var rowOrColumnShort = rowOrColumnShortFunc();
-
-console.log("the array for the next move should be: "+rowOrColumnShort);
-}
-
-*/
-
 
 
 //---------------------End Moves
 
 function flightController() {
   var holyFuck = holyShit();//this is an array of all moves performed
+  console.log(holyFuck);
   $('.ball').animate({marginTop: holyFuck[0]},400, function(){
-    $(this).animate({marginLeft: holyFuck[1]+250}, second[1], function() {
+    $(this).animate({marginLeft: holyFuck[1]}, 300, function() {
       $(this).animate({marginTop: holyFuck[2]}, 300, function() {
-        $(this).animate({marginLeft: holyFuck[3]+250}, 300);
-      })
+        $(this).animate({marginLeft: holyFuck[3]}, 300,function() {
+        $(this).animate({marginLeft: holyFuck[4]}, 300, function() {
+        $(this).animate({marginLeft: holyFuck[5]}, 300, function() {
+        $(this).animate({marginLeft: holyFuck[6]}, 300, function() {
+        $(this).animate({marginLeft: holyFuck[5]}, 300);
+      })})})})})
     })});
   }
 
