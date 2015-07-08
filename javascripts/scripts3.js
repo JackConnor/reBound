@@ -286,6 +286,12 @@ function holyShit() {
       } else {
         console.log("road is totally barren, we're going for the win!!!");
         i=11;
+        if(thisMoveDirection == "south"){
+          movesMargin.push(2000);
+        } else {
+          movesMargin.push(-2000);
+        }
+        console.log("The end of this array should be 10000: " + movesMargin)
         return movesMargin;
       }
       ////---finish finding ID of target, begin finding class
@@ -385,11 +391,24 @@ function holyShit() {
       }
       var nextId = nextIdFun(); ////returns ID of next north/south
       console.log(nextId);
+      // if(nextId/nextId == 1) {
+      //   console.log("we got a bumper up ahead");
+      // } else {
+      //   console.log("road is totally barren, we're going for the win!!!");
+      //   i=11;
+      //   return movesMargin;
+      // }
       if(nextId/nextId == 1) {
-        console.log("we got a bumper up ahead");
+      console.log("we got a bumper up ahead");
       } else {
         console.log("road is totally barren, we're going for the win!!!");
         i=11;
+        if(thisMoveDirection == "east"){
+          movesMargin.push(2000);
+        } else {
+          movesMargin.push(-2000);
+        }
+        console.log("The end of this array should be 10000: " + movesMargin)
         return movesMargin;
       }
       ////---finish finding ID of target, begin finding class
