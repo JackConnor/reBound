@@ -479,10 +479,10 @@ function flightController() {
     $(this).animate({marginLeft: holyFuck[1]}, 300, function() {
       $(this).animate({marginTop: holyFuck[2]}, 300, function() {
         $(this).animate({marginLeft: holyFuck[3]}, 300,function() {
-        $(this).animate({marginLeft: holyFuck[4]}, 300, function() {
+        $(this).animate({marginTop: holyFuck[4]}, 300, function() {
         $(this).animate({marginLeft: holyFuck[5]}, 300, function() {
-        $(this).animate({marginLeft: holyFuck[6]}, 300, function() {
-        $(this).animate({marginLeft: holyFuck[5]}, 300);
+        $(this).animate({marginTop: holyFuck[6]}, 300, function() {
+        $(this).animate({marginLeft: holyFuck[7]}, 300);
       })})})})})
     })});
   }
