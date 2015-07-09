@@ -653,9 +653,11 @@ function winRegister() {
       console.log("didn't win south");
     }
     if(playerGuess == actualWin) {
-      console.log('player one won!!');
+      $('#announce').addClass('announceWon');
+      $('#playAgain').addClass('playAgain');
     } else {
-      console.log("player one lost");
+      $('#announce').addClass('announceLost');
+      $('#playAgain').addClass('playAgain');
     }
 }
 //-------------------
@@ -667,14 +669,6 @@ function playerSelection() {
   console.log("you chose: "+x);
   playerGuess = x;
   $(this).addClass('selected');
-}
-
-function win() {
-  if(playerGuess == actualWin) {
-    alert('player one won!!');
-  } else {
-    alert("player one lost");
-  }
 }
 
 function flightController() {
@@ -708,5 +702,8 @@ function flightController() {
   $('.ball').on('click', flightController);
   ballMargin();
 
+  $('#playAgain').on('click', function() {
+    location.reload()
+  })
 //end of jquery
 })

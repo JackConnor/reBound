@@ -35,6 +35,30 @@
   width: 770px;
   height: 770px; }
 
+.announceWon {
+  position: absolute;
+  margin-left: 410px;
+  margin-top: 314px;
+  width: 400px;
+  height: 300px;
+  background-image: url("win.png");
+  z-index: 1; }
+
+.announceLost {
+  position: absolute;
+  margin-left: 410px;
+  margin-top: 314px;
+  width: 400px;
+  height: 300px;
+  background-image: url("lost.png");
+  z-index: 1; }
+
+.playAgain {
+  position: absolute;
+  margin-left: 580px;
+  margin-top: 535px;
+  z-index: 2; }
+
 .square {
   width: 100px;
   height: 100px;
