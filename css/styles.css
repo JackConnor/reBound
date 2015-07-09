@@ -80,17 +80,18 @@
   height: 60px;
   border-radius: 50%;
   display: inline-block;
-  background-color: #FFCCFF;
-  border: 1px solid red;
-  margin: 19px 19px 19px 19px; }
+  background-color: #FF0066;
+  border: 3px solid white;
+  margin: 17px 19px 19px 17px; }
 
 .won {
   background-image: url("explosion.png");
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   display: inline-block;
-  margin: 0px 0px 0px 0px; }
+  margin: 0px 0px 0px -20px;
+  border: 0px; }
 
 .blank {
   width: 100px;
