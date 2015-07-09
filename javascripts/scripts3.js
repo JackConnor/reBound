@@ -652,6 +652,11 @@ function winRegister() {
         } else {
       console.log("didn't win south");
     }
+    if(playerGuess == actualWin) {
+      console.log('player one won!!');
+    } else {
+      console.log("player one lost");
+    }
 }
 //-------------------
 
@@ -666,9 +671,9 @@ function playerSelection() {
 
 function win() {
   if(playerGuess == actualWin) {
-    console.log('player one won!!');
+    alert('player one won!!');
   } else {
-    console.log("player one lost");
+    alert("player one lost");
   }
 }
 
@@ -689,10 +694,10 @@ function flightController() {
         $(this).animate({marginLeft: flightPath[11]}, 300, function() {
         $(this).animate({marginTop: flightPath[12]}, 300, function() {
         $(this).animate({marginLeft: flightPath[13]}, 300, function() {
-        $(this).animate({marginTop: flightPath[14]}, 300, winRegister());
+        $(this).animate({marginTop: flightPath[14]}, 300, winRegister(300));
         console.log('the win was: '+actualWin);
         console.log("player 1 guess was: "+ playerGuess);
-        win();
+
       })})})})})})})})})})})})
     })});
   }
