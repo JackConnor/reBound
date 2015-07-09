@@ -517,7 +517,6 @@ function calcMoves() {
 
 
 function winRegister() {
-  console.log("winner is: " +winCircle);
   if(thisMoveDirection == "north") {
     switch (currentMoveStartPoint[0]) {
       case 0:
