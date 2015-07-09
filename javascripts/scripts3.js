@@ -412,7 +412,7 @@ function calcMoves() {
               return x[currentMoveStartPoint[0]+j];
             } else if ((x[currentMoveStartPoint[0]+j]/x[currentMoveStartPoint[0]+j]) === null){
               console.log("nada");
-            } else if(x[currentMoveStartPoint[0]] == 0){
+            } else if((x.length ===1 && x[0] == 0)){
               return 0;
             }else {
               console.log("We're outta here!");
@@ -424,7 +424,7 @@ function calcMoves() {
               return x[currentMoveStartPoint[0]-j];
             } else if ((x[currentMoveStartPoint[0]-j]/x[currentMoveStartPoint[0]-j]) === null){
               console.log("nada");
-            } else if(x[currentMoveStartPoint[0]] == 0){
+            } else if(x[0] == 0 && currentMoveStartPoint[0] !== 0){
               return 0;
             }else {
               console.log("we're outta here");
