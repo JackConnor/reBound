@@ -4,6 +4,7 @@ $(function() {
 
 var counter = 0;
 
+var winCircle = "#a";
 
 var boardArrayDown = [[null,null,null,null,null],[null,null,null,null,null],[null,null,null,null,null],[null,null,null,null,null],[null,null,null,null,null]];
 
@@ -24,7 +25,7 @@ console.log("the starting row is: " + acrossStart); //The ball starting row (1 -
 function ballMargin() {
   var pixelsMoved  = (acrossStart)*104;
   if(topOrSide == 0) {
-    $(".ball").css('margin-left', 146 + (pixelsMoved));
+    $(".ball").css('margin-left', 250 + (pixelsMoved));
   } else if(topOrSide == 1) {
     $(".ball").css('margin-left', '140px');
     $(".ball").css('margin-top', (pixelsMoved)+"px");
@@ -233,16 +234,17 @@ function dropEvent() {
 
 
 /////begin Moves
+var startX = acrossStart-1;
+console.log(startX);
+var startY = -2;
+var thisMoveDirection = "south";
+var currentMoveStartPoint = [startX, startY];
 
 function calcMoves() {
   var moves = [];
   var movesMargin = [];
   ///move one calculations (that go into our presets) go here
-  var startX = acrossStart-1;
-  console.log(startX);
-  var startY = -1;
-  var thisMoveDirection = "south";
-  var currentMoveStartPoint = [startX, startY];
+
   console.log("the starting point is: "+currentMoveStartPoint);
 
   for (var i = 0; i < 15; i++) {
@@ -308,6 +310,7 @@ function calcMoves() {
         i=11;
         if(thisMoveDirection == "south"){
           movesMargin.push(2000);
+
         } else {
           movesMargin.push(-2000);
         }
@@ -342,7 +345,7 @@ function calcMoves() {
       /////end finding direction, start finding target point
 
       var nextPointYFun = function() {
-         if(nextId <= 5) {
+         if(nextId < 5) {
            console.log('singles or 0, so our next y wil be: '+0);
            return 0;
 
@@ -370,7 +373,7 @@ function calcMoves() {
       var distanceSpaces = distanceSpacesFun();
       console.log("the distance to the next target is: "+distanceSpaces);
       var distancePixels = distanceSpaces*104;
-      var nextMoveMargin = 104 + (nextPoint[1]*104);
+      var nextMoveMargin = 208 + (nextPoint[1]*104);
       moves.push(distancePixels);
       movesMargin.push(nextMoveMargin);
       console.log('distance to next point is: '+distancePixels);
@@ -386,7 +389,7 @@ function calcMoves() {
     } else if(i%2 === 1){
       console.log("START TURN : "+i);
       console.log("move should go " +thisMoveDirection+ "and start at: "+ currentMoveStartPoint);
-    
+
       var x = boardArrayAcross[currentMoveStartPoint[1]]; ///at start, this is undefined because currentMovestrtPt[1] is -1, and not accessible in array
       console.log(x);
       var nextIdFun = function() {
@@ -485,7 +488,7 @@ function calcMoves() {
       console.log("the distance to the next target is: "+distanceSpaces);
       var distancePixels = distanceSpaces*104;
       moves.push(distancePixels);
-      var nextMoveMargin = 250 + (nextPoint[0]*104);
+      var nextMoveMargin = 354 + (nextPoint[0]*104);
       movesMargin.push(nextMoveMargin);
       console.log('distance to next point is: '+distancePixels);
       ///I think I've found all my down info
@@ -498,20 +501,136 @@ function calcMoves() {
       console.log("ONTO MOVE NUMBER "+ parseInt(i)+2);
 
 
-      } else {
-        /// i  timer is broken
-        console.log("something might be broken");
-      }
-
-      ////end for looop
+    } else {
+      /// i  timer is broken
+      console.log("something might be broken");
     }
-    ////final calls to flight controller go here
+
+    ////end for looop
+  }
 
     return movesMargin;
   }
 
 
 //---------------------End Moves
+
+
+function winRegister() {
+  console.log("winner is: " +winCircle);
+  if(thisMoveDirection == "north") {
+    switch (currentMoveStartPoint[0]) {
+      case 0:
+        winCircle = "#a"
+        $(winCircle).addClass('won');
+        break;
+      case 1:
+        winCircle = "#b"
+        $(winCircle).addClass('won');
+        break;
+      case 2:
+        winCircle = "#c"
+        $(winCircle).addClass('won');
+        break;
+      case 3:
+        winCircle = "#d"
+        $(winCircle).addClass('won');
+        break;
+      case 4:
+        winCircle = "#e"
+        $(winCircle).addClass('won');
+        break;
+
+      default:
+      console.log("something got messd up");
+
+    }
+  }else if(thisMoveDirection == "south") {
+      switch (currentMoveStartPoint[0]) {
+        case 0:
+          winCircle = "#p"
+          $(winCircle).addClass('won');
+          break;
+        case 1:
+          winCircle = "#q"
+          $(winCircle).addClass('won');
+          break;
+        case 2:
+          winCircle = "#r"
+          $(winCircle).addClass('won');
+          break;
+        case 3:
+          winCircle = "#s"
+          $(winCircle).addClass('won');
+          break;
+        case 4:
+          winCircle = "#t"
+          $(winCircle).addClass('won');
+          break;
+
+        default:
+        console.log("something got messd up");
+
+      }
+    } else if(thisMoveDirection == "east") {
+        switch (currentMoveStartPoint[1]) {
+          case 0:
+            winCircle = "#g"
+            $(winCircle).addClass('won');
+            break;
+          case 1:
+            winCircle = "#i"
+            $(winCircle).addClass('won');
+            break;
+          case 2:
+            winCircle = "#k"
+            $(winCircle).addClass('won');
+            break;
+          case 3:
+            winCircle = "#m"
+            $(winCircle).addClass('won');
+            break;
+          case 4:
+            winCircle = "#o"
+            $(winCircle).addClass('won');
+            break;
+
+          default:
+          console.log("something got messd up");
+
+        }
+      } else if(thisMoveDirection == "west") {
+          switch (currentMoveStartPoint[1]) {
+            case 0:
+              winCircle = "#f"
+              $(winCircle).addClass('won');
+              break;
+            case 1:
+              winCircle = "#h"
+              $(winCircle).addClass('won');
+              break;
+            case 2:
+              winCircle = "#j"
+              $(winCircle).addClass('won');
+              break;
+            case 3:
+              winCircle = "#l"
+              $(winCircle).addClass('won');
+              break;
+            case 4:
+              winCircle = "#n"
+              $(winCircle).addClass('won');
+              break;
+
+            default:
+            console.log("something got messd up");
+
+          }
+        } else {
+      console.log("didn't win south");
+    }
+}
+
 
 function flightController() {
   var flightPath = calcMoves();//this is an array of all moves performed
@@ -530,7 +649,7 @@ function flightController() {
         $(this).animate({marginLeft: flightPath[11]}, 300, function() {
         $(this).animate({marginTop: flightPath[12]}, 300, function() {
         $(this).animate({marginLeft: flightPath[13]}, 300, function() {
-        $(this).animate({marginTop: flightPath[14]}, 300);
+        $(this).animate({marginTop: flightPath[14]}, 300, winRegister());
       })})})})})})})})})})})})
     })});
   }
