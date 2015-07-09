@@ -19,7 +19,7 @@ function marginAmount() {
 }
 
 var acrossStart = parseInt(marginAmount());
-console.log("the starting row is: " + acrossStart); //The ball starting row (1 - 5)
+console.log("the starting row is: " + acrossStart-1); //The ball starting row (1 - 5)
 //note: column number is only thing not on 0-4 spectrum
 
 function ballMargin() {
@@ -269,7 +269,7 @@ function calcMoves() {
       console.log(x);
       var nextIdFun = function() {
         if(thisMoveDirection == "south"){
-          for(j=1; j < x.length+1; j++) {
+          for(j=1; j < x.length+2; j++) {
 
             if((x[currentMoveStartPoint[1]+j]/x[currentMoveStartPoint[1]+j]) === 1) {
               console.log('got a real number');
