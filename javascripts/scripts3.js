@@ -6,6 +6,10 @@ var counter = 0;
 
 var winCircle = "#a";
 
+var playerGuess = "";
+
+var actualWin = "";
+
 var boardArrayDown = [[null,null,null,null,null],[null,null,null,null,null],[null,null,null,null,null],[null,null,null,null,null],[null,null,null,null,null]];
 
 var boardArrayAcross = [[null,null,null,null,null],[null,null,null,null,null],[null,null,null,null,null],[null,null,null,null,null],[null,null,null,null,null]];
@@ -520,24 +524,29 @@ function winRegister() {
   if(thisMoveDirection == "north") {
     switch (currentMoveStartPoint[0]) {
       case 0:
-        winCircle = "#a"
+        winCircle = "#a";
         $(winCircle).addClass('won');
+        actualWin = "a";
         break;
       case 1:
-        winCircle = "#b"
+        winCircle = "#b";
         $(winCircle).addClass('won');
+        actualWin = "b";
         break;
       case 2:
-        winCircle = "#c"
+        winCircle = "#c";
         $(winCircle).addClass('won');
+        actualWin = "c";
         break;
       case 3:
-        winCircle = "#d"
+        winCircle = "#d";
         $(winCircle).addClass('won');
+        actualWin = "d";
         break;
       case 4:
-        winCircle = "#e"
+        winCircle = "#e";
         $(winCircle).addClass('won');
+        actualWin = "e";
         break;
 
       default:
@@ -547,24 +556,29 @@ function winRegister() {
   }else if(thisMoveDirection == "south") {
       switch (currentMoveStartPoint[0]) {
         case 0:
-          winCircle = "#p"
+          winCircle = "#p";
           $(winCircle).addClass('won');
+          actualWin = "p";
           break;
         case 1:
-          winCircle = "#q"
+          winCircle = "#q";
           $(winCircle).addClass('won');
+          actualWin = "q";
           break;
         case 2:
-          winCircle = "#r"
+          winCircle = "#r";
           $(winCircle).addClass('won');
+          actualWin = "r";
           break;
         case 3:
-          winCircle = "#s"
+          winCircle = "#s";
           $(winCircle).addClass('won');
+          actualWin = "s";
           break;
         case 4:
-          winCircle = "#t"
+          winCircle = "#t";
           $(winCircle).addClass('won');
+          actualWin = "t";
           break;
 
         default:
@@ -574,24 +588,29 @@ function winRegister() {
     } else if(thisMoveDirection == "east") {
         switch (currentMoveStartPoint[1]) {
           case 0:
-            winCircle = "#g"
+            winCircle = "#g";
             $(winCircle).addClass('won');
+            actualWin = "g";
             break;
           case 1:
-            winCircle = "#i"
+            winCircle = "#i";
             $(winCircle).addClass('won');
+            actualWin = "i";
             break;
           case 2:
-            winCircle = "#k"
+            winCircle = "#k";
             $(winCircle).addClass('won');
+            actualWin = "k";
             break;
           case 3:
-            winCircle = "#m"
+            winCircle = "#m";
             $(winCircle).addClass('won');
+            actualWin = "m";
             break;
           case 4:
-            winCircle = "#o"
+            winCircle = "#o";
             $(winCircle).addClass('won');
+            actualWin = "o";
             break;
 
           default:
@@ -601,24 +620,29 @@ function winRegister() {
       } else if(thisMoveDirection == "west") {
           switch (currentMoveStartPoint[1]) {
             case 0:
-              winCircle = "#f"
+              winCircle = "#f";
               $(winCircle).addClass('won');
+              actualWin = "f";
               break;
             case 1:
-              winCircle = "#h"
+              winCircle = "#h";
               $(winCircle).addClass('won');
+              actualWin = "h";
               break;
             case 2:
-              winCircle = "#j"
+              winCircle = "#j";
               $(winCircle).addClass('won');
+              actualWin = "j";
               break;
             case 3:
-              winCircle = "#l"
+              winCircle = "#l";
               $(winCircle).addClass('won');
+              actualWin = "l";
               break;
             case 4:
-              winCircle = "#n"
+              winCircle = "#n";
               $(winCircle).addClass('won');
+              actualWin = "n";
               break;
 
             default:
@@ -649,6 +673,8 @@ function flightController() {
         $(this).animate({marginTop: flightPath[12]}, 300, function() {
         $(this).animate({marginLeft: flightPath[13]}, 300, function() {
         $(this).animate({marginTop: flightPath[14]}, 300, winRegister());
+        console.log('the win was: '+actualWin);
+        console.log("player 1 guess was: "+ playerGuess);
       })})})})})})})})})})})})
     })});
   }
