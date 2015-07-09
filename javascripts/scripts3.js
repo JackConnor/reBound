@@ -386,23 +386,7 @@ function calcMoves() {
     } else if(i%2 === 1){
       console.log("START TURN : "+i);
       console.log("move should go " +thisMoveDirection+ "and start at: "+ currentMoveStartPoint);
-      //left and right goes here
-      //   var xFunc = function() {
-      //     if(boardArrayAcross[0][0] === 0) {
-      //       console.log("still got our zero");
-      //     return [0];
-      //   } else{
-      //     console.log("Our zero didn't catch or the next move was non-zero");
-      //     return boardArrayAcross[currentMoveStartPoint[1]-1];
-      //   }
-      // }
-      // var xFuncX =function() {
-      //   if(thisMoveDirection == "west") {
-      //     return boardArrayDown[currentMoveStartPoint[1]];
-      //   } else if(thisMoveDirectiondirection == "west") {
-      //     return boardArrayDown[currentMoveStartPoint[0]-1];
-      //   }
-      // }
+    
       var x = boardArrayAcross[currentMoveStartPoint[1]]; ///at start, this is undefined because currentMovestrtPt[1] is -1, and not accessible in array
       console.log(x);
       var nextIdFun = function() {
