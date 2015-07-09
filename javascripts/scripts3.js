@@ -63,6 +63,7 @@ function myHelperBack() { //this is the drag-clone so you can do multiples]
 
 function dropEvent() {
   var squareId = parseInt(this.id);
+  console.log("you just pressed a key with id of: "+squareId);
   if(counter == 0){
     $(this).addClass('bounceForward');
 //-------adds classes to squares when dropped
@@ -223,7 +224,7 @@ function dropEvent() {
       console.log("The across array for this spot is: "+boardArrayAcross);
       console.log("the down spot for this array is: "+ boardArrayDown);
     break;
-    default: console.log('nope');
+    default: console.log("keypress didn't find "+ keypress);
   }
   console.log(this);
   console.log("our start point shoudl be: "+ (acrossStart-1));
@@ -233,35 +234,49 @@ function dropEvent() {
 
 /////begin Moves
 
-function holyShit() {
+function calcMoves() {
   var moves = [];
   var movesMargin = [];
   ///move one calculations (that go into our presets) go here
   var startX = acrossStart-1;
   console.log(startX);
   var startY = -1;
-  console.log("starting point will be ["+startX+','+startY+']');
-  var currentMoveStartPoint = [startX, startY];
   var thisMoveDirection = "south";
-  for (var i = 0; i < 10; i++) {
-    /*
-  var leftMargin = 250 + ((acrossStart-1)*104);
-  var topMargin = 0;
-  console.log("left margin is: "+ leftMargin);
-  console.log("top margin is: "+ topMargin);
-*/
-    if(i%2 === 0) { ///start the engine
+  var currentMoveStartPoint = [startX, startY];
+  console.log("the starting point is: "+currentMoveStartPoint);
 
-      ///downs and ups go here
-      var x = boardArrayDown[currentMoveStartPoint[0]]; ///return the proper array
+  for (var i = 0; i < 15; i++) {
+
+      if(i%2 === 0) {
+        //downs and ups go here
+        console.log("START TURN : "+i);
+        console.log("boardArrayDown is currently: "+boardArrayDown[currentMoveStartPoint[0]]);
+        var xFunc = function() {
+          if(boardArrayDown[0][0] === 0) {
+            console.log("still got our zero");
+          return [0];
+        } else{
+          console.log("Our zero didn't catch, returned: "+boardArrayDown[currentMoveStartPoint[1]]);
+          return boardArrayDown[currentMoveStartPoint[1]];
+        }
+      }
+      //var x = xFunc();
+      var x = boardArrayDown[currentMoveStartPoint[0]];
+      //console.log("this array's length is: "+ x.length);
+      console.log("which is weird because the array is: "+x) ///return the proper array
       console.log(x);
       var nextIdFun = function() {
         if(thisMoveDirection == "south"){
           for(j=1; j < x.length+1; j++) {
+
             if((x[currentMoveStartPoint[1]+j]/x[currentMoveStartPoint[1]+j]) === 1) {
+              console.log('got a real number');
               return x[currentMoveStartPoint[1]+j];
             } else if ((x[currentMoveStartPoint[1]+j]/x[currentMoveStartPoint[1]+j]) === null){
-              console.log("nada");
+              console.log("nada");///////////////////////////////////////left ehre
+            } else if(x[currentMoveStartPoint[1]+j] === 0){
+              console.log('looks like it was a zero');
+              return 0;
             } else {
               console.log("we're outta here");
             }
@@ -272,16 +287,21 @@ function holyShit() {
               return x[currentMoveStartPoint[1]-j];
             } else if ((x[currentMoveStartPoint[1]-j]/x[currentMoveStartPoint[1]-j]) === null){
               console.log("nada");
+            } else if(x[currentMoveStartPoint[1]-1] == 0){
+              return 0;
             } else {
               console.log("we're outta here");
             }
           }
+        } else {
+          console.log("else!!!");
         }
         //ideal place for cutoff switch
       }
       var nextId = nextIdFun(); ////returns ID of next north/south
-      console.log(nextId);
-      if(nextId/nextId == 1) {
+      console.log("we found the id! "+nextId);
+
+      if(nextId/nextId == 1 || nextId < 1) {
       console.log("we got a bumper up ahead");
       } else {
         console.log("road is totally barren, we're going for the win!!!");
@@ -318,21 +338,26 @@ function holyShit() {
         }
       }
       var nextDirection = nextDirectionFun(); ////returns next direction
-      console.log(nextDirection); 
+      console.log("next direction is " + nextDirection);
       /////end finding direction, start finding target point
 
       var nextPointYFun = function() {
-         if(nextId%nextId == nextId || nextId === 5) {
-           return 1;
+         if(nextId <= 5) {
+           console.log('singles or 0, so our next y wil be: '+0);
+           return 0;
+
          } else {
+           console.log("This number should be greater than 0");
           return ((nextId - nextId%5)/5);
          }
-      } 
+      }
       var nextPointY = nextPointYFun();
-      var nextPointX = nextId%5;
+      console.log("the next row is: "+nextPointY);
+      var nextPointX = (nextId%5);/////!!!
+      console.log("our next column is: "+nextPointX);
       var nextPoint = [nextPointX, nextPointY]; //returns [x,y] of next move
       console.log("the next point should be: " + nextPoint);
-      /////end finding next point coordinates, begin finding direction
+
       var distanceSpacesFun = function() {
         if(thisMoveDirection == "south") {
           return nextPoint[1] - currentMoveStartPoint[1];
@@ -345,11 +370,10 @@ function holyShit() {
       var distanceSpaces = distanceSpacesFun();
       console.log("the distance to the next target is: "+distanceSpaces);
       var distancePixels = distanceSpaces*104;
-      var nextMoveMargin = 104 + (nextPoint[1]*104);  
-      moves.push(distancePixels); 
+      var nextMoveMargin = 104 + (nextPoint[1]*104);
+      moves.push(distancePixels);
       movesMargin.push(nextMoveMargin);
       console.log('distance to next point is: '+distancePixels);
-      ///I think I've found all my down info
       currentMoveStartPoint = nextPoint;
       console.log("we're feeding this position to next move: "+currentMoveStartPoint);
       thisMoveDirection = nextDirection;
@@ -360,9 +384,10 @@ function holyShit() {
       console.log("ONTO MOVE NUMBER "+ (i+1));
 
     } else if(i%2 === 1){
+      console.log("START TURN : "+i);
       console.log("move should go " +thisMoveDirection+ "and start at: "+ currentMoveStartPoint);
-      //left and right goes here
-      var x = boardArrayAcross[currentMoveStartPoint[1]]; ///return the proper array
+    
+      var x = boardArrayAcross[currentMoveStartPoint[1]]; ///at start, this is undefined because currentMovestrtPt[1] is -1, and not accessible in array
       console.log(x);
       var nextIdFun = function() {
         if(thisMoveDirection == "east"){
@@ -371,7 +396,9 @@ function holyShit() {
               return x[currentMoveStartPoint[0]+j];
             } else if ((x[currentMoveStartPoint[0]+j]/x[currentMoveStartPoint[0]+j]) === null){
               console.log("nada");
-            } else {
+            } else if((x.length ===1 && x[0] == 0)){
+              return 0;
+            }else {
               console.log("We're outta here!");
             }
           }
@@ -381,34 +408,28 @@ function holyShit() {
               return x[currentMoveStartPoint[0]-j];
             } else if ((x[currentMoveStartPoint[0]-j]/x[currentMoveStartPoint[0]-j]) === null){
               console.log("nada");
-            } else {
+            } else if(x[0] == 0 && currentMoveStartPoint[0] !== 0){
+              return 0;
+            }else {
               console.log("we're outta here");
             }
           }
+          }
         }
-        //ideal place for cutoff switch
- 
-      }
+
       var nextId = nextIdFun(); ////returns ID of next north/south
-      console.log(nextId);
-      // if(nextId/nextId == 1) {
-      //   console.log("we got a bumper up ahead");
-      // } else {
-      //   console.log("road is totally barren, we're going for the win!!!");
-      //   i=11;
-      //   return movesMargin;
-      // }
-      if(nextId/nextId == 1) {
+      console.log("next Id is " + nextId);
+      if(nextId/nextId == 1 || nextId == 0) {
       console.log("we got a bumper up ahead");
       } else {
         console.log("road is totally barren, we're going for the win!!!");
         i=11;
         if(thisMoveDirection == "east"){
           movesMargin.push(2000);
-        } else {
+        } else {///this is to go west
           movesMargin.push(-2000);
         }
-        console.log("The end of this array should be 10000: " + movesMargin)
+        console.log("The end of this array should be 2000: " + movesMargin)
         return movesMargin;
       }
       ////---finish finding ID of target, begin finding class
@@ -435,7 +456,7 @@ function holyShit() {
         }
       }
       var nextDirection = nextDirectionFun(); ////returns next direction
-      console.log(nextDirection); 
+      console.log("the next direction should be: "+nextDirection);
       /////end finding direction, start finding target point
 
       var nextPointYFun = function() {
@@ -444,7 +465,7 @@ function holyShit() {
          } else {
           return ((nextId - nextId%5)/5);
          }
-      } 
+      }
       var nextPointY = nextPointYFun();
       var nextPointX = nextId%5;
       var nextPoint = [nextPointX, nextPointY]; //returns [x,y] of next move
@@ -452,19 +473,20 @@ function holyShit() {
       /////end finding next point coordinates, begin finding direction
       var distanceSpacesFun = function() {
         if(thisMoveDirection == "west") {
+          console.log()
           return nextPoint[0] - currentMoveStartPoint[0];
         } else if(thisMoveDirection == "east") {
-          return (currentMoveStartPoint[0] - nextPoint[0])*-1;
+          return (currentMoveStartPoint[0] - nextPoint[0])*(-1);
         } else {
-          console.log("what the hell?")
+          console.log("what the hell?");
         }
       }
       var distanceSpaces = distanceSpacesFun();
       console.log("the distance to the next target is: "+distanceSpaces);
       var distancePixels = distanceSpaces*104;
       moves.push(distancePixels);
-      var nextMoveMargin = 250 + (nextPoint[0]*104); 
-      movesMargin.push(nextMoveMargin); 
+      var nextMoveMargin = 250 + (nextPoint[0]*104);
+      movesMargin.push(nextMoveMargin);
       console.log('distance to next point is: '+distancePixels);
       ///I think I've found all my down info
       currentMoveStartPoint = nextPoint;
@@ -476,33 +498,40 @@ function holyShit() {
       console.log("ONTO MOVE NUMBER "+ parseInt(i)+2);
 
 
-    } else {
-      /// i  timer is broken
-      console.log("something might be broken");
+      } else {
+        /// i  timer is broken
+        console.log("something might be broken");
+      }
+
+      ////end for looop
     }
+    ////final calls to flight controller go here
 
-    ////end for looop
+    return movesMargin;
   }
-  ////final calls to flight controller go here
-
-  return movesMargin;
-}
 
 
 //---------------------End Moves
 
 function flightController() {
-  var holyFuck = holyShit();//this is an array of all moves performed
-  console.log(holyFuck);
-  $('.ball').animate({marginTop: holyFuck[0]},400, function(){
-    $(this).animate({marginLeft: holyFuck[1]}, 300, function() {
-      $(this).animate({marginTop: holyFuck[2]}, 300, function() {
-        $(this).animate({marginLeft: holyFuck[3]}, 300,function() {
-        $(this).animate({marginTop: holyFuck[4]}, 300, function() {
-        $(this).animate({marginLeft: holyFuck[5]}, 300, function() {
-        $(this).animate({marginTop: holyFuck[6]}, 300, function() {
-        $(this).animate({marginLeft: holyFuck[7]}, 300);
-      })})})})})
+  var flightPath = calcMoves();//this is an array of all moves performed
+  console.log(flightPath);
+  $('.ball').animate({marginTop: flightPath[0]},400, function(){
+    $(this).animate({marginLeft: flightPath[1]}, 300, function() {
+      $(this).animate({marginTop: flightPath[2]}, 300, function() {
+        $(this).animate({marginLeft: flightPath[3]}, 300,function() {
+        $(this).animate({marginTop: flightPath[4]}, 300, function() {
+        $(this).animate({marginLeft: flightPath[5]}, 300, function() {
+        $(this).animate({marginTop: flightPath[6]}, 300, function() {
+        $(this).animate({marginLeft: flightPath[7]}, 300, function() {
+        $(this).animate({marginTop: flightPath[8]}, 300, function() {
+        $(this).animate({marginLeft: flightPath[9]}, 300,function() {
+        $(this).animate({marginTop: flightPath[10]}, 300, function() {
+        $(this).animate({marginLeft: flightPath[11]}, 300, function() {
+        $(this).animate({marginTop: flightPath[12]}, 300, function() {
+        $(this).animate({marginLeft: flightPath[13]}, 300, function() {
+        $(this).animate({marginTop: flightPath[14]}, 300);
+      })})})})})})})})})})})})
     })});
   }
 
