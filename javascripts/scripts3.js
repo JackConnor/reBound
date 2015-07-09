@@ -519,7 +519,7 @@ function calcMoves() {
 
 //---------------------End Moves
 
-
+//////deterimining where win is ----------
 function winRegister() {
   if(thisMoveDirection == "north") {
     switch (currentMoveStartPoint[0]) {
@@ -653,7 +653,24 @@ function winRegister() {
       console.log("didn't win south");
     }
 }
+//-------------------
 
+///------------ Player guesses winning square -----
+
+function playerSelection() {
+  var x = this.id;
+  console.log("you chose: "+x);
+  playerGuess = x;
+  $(this).addClass('selected');
+}
+
+function win() {
+  if(playerGuess == actualWin) {
+    console.log('player one won!!');
+  } else {
+    console.log("player one lost");
+  }
+}
 
 function flightController() {
   var flightPath = calcMoves();//this is an array of all moves performed
@@ -675,11 +692,13 @@ function flightController() {
         $(this).animate({marginTop: flightPath[14]}, 300, winRegister());
         console.log('the win was: '+actualWin);
         console.log("player 1 guess was: "+ playerGuess);
+        win();
       })})})})})})})})})})})})
     })});
   }
 
   //clicks, events, and calls
+  $('.win').on('click', playerSelection);
 
   $('.ball').on('click', flightController);
   ballMargin();

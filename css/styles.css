@@ -51,6 +51,15 @@
   background-color: #FFCCFF;
   margin: 25px 25px 25px 25px; }
 
+.selected {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: #FFCCFF;
+  border: 1px solid red;
+  margin: 20px 20px 20px 20px; }
+
 .won {
   background-image: url("explosion.png");
   width: 100px;
