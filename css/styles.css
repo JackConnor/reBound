@@ -1,3 +1,9 @@
+p {
+  font-size: 40px;
+  font-weight: bolder;
+  position: relative;
+  margin: 7px 0px 0px 24px; }
+
 .ball {
   width: 100px;
   height: 100px;
@@ -9,6 +15,44 @@
   border-radius: 50%;
   z-index: 2; }
 
+.start {
+  position: absolute;
+  margin-left: 250px;
+  margin-top: 150px;
+  width: 550px;
+  height: 450px;
+  background-color: #D8D8D8;
+  z-index: 1; }
+
+#seeInstructions {
+  display: relative;
+  text-align: center;
+  font-size: 34px; }
+
+.inst {
+  color: white;
+  font-size: 28px;
+  text-align: center;
+  height: 110px;
+  width: 150px;
+  margin-top: 240px;
+  margin-left: 120px;
+  background-color: red;
+  position: relative;
+  float: left; }
+
+.strtGame {
+  color: white;
+  text-align: center;
+  font-size: 28px;
+  margin-top: 240px;
+  margin-left: 15px;
+  height: 110px;
+  width: 150px;
+  background-color: blue;
+  position: relative;
+  float: left; }
+
 .squareTest {
   width: 100px;
   height: 100px;
@@ -19,7 +63,7 @@
 .holder {
   width: 1000px;
   height: 900px;
-  background-color: gray;
+  background-color: black;
   position: absolute;
   margin: 0 auto;
   left: 0;
@@ -148,12 +192,6 @@
   display: inline-block;
   margin-left: 0px;
   margin-left: 0px; }
-
-p {
-  font-size: 40px;
-  font-weight: bolder;
-  position: relative;
-  margin: 7px 0px 0px 24px; }
 
 /*# sourceMappingURL=styles.css.map */
 

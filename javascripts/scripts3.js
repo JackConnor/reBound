@@ -697,9 +697,16 @@ function flightController() {
   }
 
   //clicks, events, and calls
+  $('.strtGame').on('click', function() {
+    console.log('click is working');
+    $('.start').removeClass('start');
+    $('.inst').removeClass('inst');
+    $('.strtGame').removeClass('strtGame');
+  })
+
   $('.win').on('click', playerSelection);
 
-  $('.ball').on('click', flightController);
+  $('.win').on('click', flightController);
   ballMargin();
 
   $('#playAgain').on('click', function() {
