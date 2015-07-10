@@ -21,8 +21,62 @@ p {
   margin-top: 150px;
   width: 550px;
   height: 450px;
-  background-color: #D8D8D8;
+  background-image: url("card1.png");
   z-index: 1; }
+
+.nextPage {
+  width: 0px;
+  height: 75px;
+  background-image: url("nextPage.png");
+  margin-top: 520px;
+  margin-left: 595px;
+  position: absolute;
+  z-index: 3; }
+
+.nextPage2 {
+  width: 0px;
+  height: 75px;
+  background-image: url("nextPage.png");
+  margin-top: 520px;
+  margin-left: 595px;
+  position: absolute;
+  z-index: 3; }
+
+.nextPage3 {
+  width: 0px;
+  height: 75px;
+  background-image: url("playGame2.png");
+  margin-top: 520px;
+  margin-left: 595px;
+  position: absolute;
+  z-index: 3; }
+
+.card2 {
+  position: absolute;
+  margin-left: 250px;
+  margin-top: 150px;
+  width: 550px;
+  height: 450px;
+  background-image: url("card2.png");
+  z-index: 2; }
+
+.card3 {
+  position: absolute;
+  margin-left: 250px;
+  margin-top: 150px;
+  width: 550px;
+  height: 450px;
+  background-image: url("card2a.png");
+  z-index: 2; }
+
+.card4 {
+  position: absolute;
+  margin-left: 250px;
+  margin-top: 150px;
+  width: 550px;
+  height: 450px;
+  background-image: url("finalCard.png");
+  z-index: 2; }
 
 #seeInstructions {
   display: relative;
@@ -35,9 +89,9 @@ p {
   text-align: center;
   height: 110px;
   width: 150px;
-  margin-top: 240px;
-  margin-left: 120px;
-  background-color: red;
+  margin-top: 265px;
+  margin-left: 110px;
+  background-image: url(inst.png);
   position: relative;
   float: left; }
 
@@ -45,11 +99,11 @@ p {
   color: white;
   text-align: center;
   font-size: 28px;
-  margin-top: 240px;
+  margin-top: 265px;
   margin-left: 15px;
   height: 110px;
   width: 150px;
-  background-color: blue;
+  background-image: url("play.png");
   position: relative;
   float: left; }
 

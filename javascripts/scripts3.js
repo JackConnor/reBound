@@ -704,6 +704,37 @@ function flightController() {
     $('.strtGame').removeClass('strtGame');
   })
 
+  $('.inst').on('click', function() {
+    $('.start').addClass('card2');
+    $('.start').removeClass('start');
+    $('.inst').removeClass('inst');
+    $('.strtGame').removeClass('strtGame');
+    $('.nextPage').css('width', '200px');
+  });
+
+  $('.nextPage').on('click', function() {
+    console.log('its clicking');
+    $('.card2').addClass('card3');
+    $('.card2').removeClass('card2');
+    $('.nextPage').css('width', '0px');
+    $('.nextPage2').css('width', '200px');
+  });
+
+  $('.nextPage2').on('click', function() {
+    console.log('its clicking');
+    $('.card3').addClass('card4');
+    $('.card3').removeClass('card3');
+    $('.nextPage2').css('width', '0px');
+    $('.nextPage3').css('width', '200px');
+  });
+
+
+  $('.nextPage3').on('click', function() {
+    console.log('its clicking');
+    $('.card4').removeClass('card4');
+    $('.nextPage3').css('width', '0px');
+  });
+
   $('.win').on('click', playerSelection);
 
   $('.win').on('click', flightController);
